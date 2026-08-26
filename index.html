@@ -37,6 +37,26 @@
 </head>
 <body>
     <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
+    
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" aria-hidden="true">
+        <div class="cursor-dot"></div>
+        <div class="cursor-outline"></div>
+    </div>
+    
+    <!-- Particle Canvas -->
+    <canvas class="particle-canvas" aria-hidden="true"></canvas>
+    
+    <!-- Morphing Blobs -->
+    <div class="morphing-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    
+    <!-- Aurora Effect -->
+    <div class="aurora-effect" aria-hidden="true"></div>
 
     <!-- Navigation -->
     <nav class="nav">
@@ -47,7 +67,7 @@
                 <a href="#services">Services</a>
                 <a href="#projects">Projets</a>
                 <a href="#process">Processus</a>
-                <a href="#contact" class="nav-cta">Écris-moi</a>
+                <a href="#contact" class="nav-cta magnetic-btn">Écris-moi</a>
             </div>
             <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links">
                 <span></span>
@@ -73,8 +93,8 @@
                     Je suis Wany, développeur web de 16 ans. Je conçois des sites modernes, rapides et sur-mesure pour les coachs sportifs et les pros — pour que ton activité ait enfin la présence en ligne qu'elle mérite.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">Voir mes créations →</a>
-                    <a href="#contact" class="btn btn-secondary">Discutons de ton projet</a>
+                    <a href="#projects" class="btn btn-primary neon-border magnetic-btn">Voir mes créations →</a>
+                    <a href="#contact" class="btn btn-secondary magnetic-btn">Discutons de ton projet</a>
                 </div>
                 <div class="hero-proof">
                     <span>✓ 3 sites coachs livrés</span>
@@ -83,7 +103,8 @@
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="hero-mockup" id="heroMockup">
+                <div class="mockup-frame">
+                    <div class="hero-mockup" id="heroMockup">
                     <div class="mockup-bar">
                         <span class="b-dot"></span>
                         <span class="b-dot"></span>
@@ -106,22 +127,25 @@
                             <div class="m-img"></div>
                         </div>
                         <div class="m-stats">
-                            <div class="m-stat"><b>500+</b><span>élèves</span></div>
-                            <div class="m-stat"><b>98%</b><span>réussite</span></div>
-                            <div class="m-stat"><b>5+</b><span>ans</span></div>
+                            <div class="m-stat"><b data-count="500" data-suffix="+">500+</b><span>élèves</span></div>
+                            <div class="m-stat"><b data-count="98" data-suffix="%">98%</b><span>réussite</span></div>
+                            <div class="m-stat"><b data-count="5" data-suffix="+">5+</b><span>ans</span></div>
                         </div>
                     </div>
+                </div>
                 </div>
                 <div class="hero-chip chip-1">⚡ Rapide &amp; optimisé</div>
                 <div class="hero-chip chip-2">📱 100% responsive</div>
                 <div class="hero-chip chip-3">🎨 Sur-mesure</div>
             </div>
         </div>
+        <div class="hero-spotlight" aria-hidden="true"></div>
         <div class="hero-animation">
             <div class="glow-orb glow-1"></div>
             <div class="glow-orb glow-2"></div>
             <div class="glow-orb glow-3"></div>
         </div>
+        <div class="scroll-hint" aria-hidden="true"></div>
     </section>
 
     <!-- Marquee -->
@@ -129,6 +153,16 @@
         <div class="marquee-track">
             <span>Coachs sportifs</span><i>✦</i><span>Nutrition</span><i>✦</i><span>Landing pages</span><i>✦</i><span>Sites vitrines</span><i>✦</i><span>Barbiers</span><i>✦</i><span>Indépendants</span><i>✦</i>
             <span>Coachs sportifs</span><i>✦</i><span>Nutrition</span><i>✦</i><span>Landing pages</span><i>✦</i><span>Sites vitrines</span><i>✦</i><span>Barbiers</span><i>✦</i><span>Indépendants</span><i>✦</i>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-strip" aria-hidden="true">
+        <div class="container stats-grid">
+            <div class="stat-item"><b data-count="3" data-suffix="+">3+</b><span>Sites coachs livrés</span></div>
+            <div class="stat-item"><b data-count="100" data-suffix="%">100%</b><span>Personnalisé</span></div>
+            <div class="stat-item"><b data-count="24" data-suffix="h">24h</b><span>Délai de réponse max</span></div>
+            <div class="stat-item"><b class="stat-inf">∞</b><span>Modifications illimitées</span></div>
         </div>
     </div>
 
@@ -213,7 +247,7 @@
             <div class="projects-grid">
                 <!-- Project 1 : Coach Barbie -->
                 <div class="project-card">
-                    <div class="project-image p-barbie">
+                    <div class="project-image p-barbie img-reveal">
                         <div class="browser-bar">
                             <span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span>
                             <span class="b-url">coach-barbie.fr</span>
@@ -242,7 +276,7 @@
                 </div>
                 <!-- Project 2 : Nono Coach Nutrition -->
                 <div class="project-card">
-                    <div class="project-image p-nono">
+                    <div class="project-image p-nono img-reveal">
                         <div class="browser-bar">
                             <span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span>
                             <span class="b-url">nono-coach.fr</span>
@@ -271,7 +305,7 @@
                 </div>
                 <!-- Project 3 : YujiroGrind -->
                 <div class="project-card">
-                    <div class="project-image p-yujiro">
+                    <div class="project-image p-yujiro img-reveal">
                         <div class="browser-bar">
                             <span class="b-dot"></span><span class="b-dot"></span><span class="b-dot"></span>
                             <span class="b-url">yujirogrind.app</span>
@@ -368,7 +402,7 @@
                     Une idée, un projet, ou juste envie de discuter ? Écris-moi. Et pas d'inquiétude : je peux faire toutes les modifications que tu veux, même après la livraison.
                 </p>
                 <div class="contact-buttons">
-                    <a href="mailto:ytop3sinj@gmail.com" class="btn btn-primary btn-large">Commencer mon projet 💬</a>
+                    <a href="mailto:ytop3sinj@gmail.com" class="btn btn-primary btn-large neon-border magnetic-btn">Commencer mon projet 💬</a>
                     <p class="contact-fast">⚡ Je réponds généralement en moins de 24h</p>
                     <div class="contact-social">
                         <a href="https://instagram.com/wn.1r3" target="_blank" rel="noopener" class="social-link">
@@ -406,10 +440,12 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Wany — Fait avec ❤️ par un développeur de 16 ans.</p>
+                <p>&copy; 2026 Wany — Fait avec ❤️ par un développeur de 16 ans. <span class="sys-tag">WANY.SYS v3.0</span></p>
             </div>
         </div>
     </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Retour en haut" title="Retour en haut">↑</button>
 
     <script src="script.js"></script>
 </body>
