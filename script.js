@@ -101,6 +101,19 @@ const navAnchors = document.querySelectorAll('.menu-desktop a[href^="#"]');
     sections.forEach(s => observer.observe(s));
 })();
 
+// ===== BARRE DE PROGRESSION =====
+const scrollProgress = document.getElementById('scrollProgress');
+if (scrollProgress) {
+    const updateProgress = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const p = max > 0 ? window.scrollY / max : 0;
+        scrollProgress.style.transform = `scaleX(${p})`;
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress, { passive: true });
+    updateProgress();
+}
+
 // ===== BOUTON RETOUR EN HAUT =====
 const backToTop = document.getElementById('backToTop');
 if (backToTop) {

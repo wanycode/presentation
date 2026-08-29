@@ -1,7 +1,9 @@
 /* ============================================================
-   WANY — édition papier/encre, énergique & sport
-   Palette : PAPIER chaud · ENCRE profonde · VERMILLON signal
-   Typo    : Unbounded (display) · Space Grotesk (texte)
+   WANY — direction artistique "print & sport"
+   Base claire : #F5F5F5  ·  Encre : #0B0B0B  ·  Signal : #FF6B00
+   Typo : Unbounded (display) · Space Grotesk (texte)
+   Motifs distinctifs : repères de coupe, monogrammes à coin
+   replié, sections numérotées, bandeau ticker.
    ============================================================ */
 
 * {
@@ -11,16 +13,17 @@
 }
 
 :root {
-    --paper: #F4EFE6;
-    --paper-2: #EDE7D8;
-    --paper-3: #E4DCC9;
-    --ink: #19140D;
-    --ink-soft: #4B4237;
-    --muted: #7E7363;
-    --line: rgba(25, 20, 13, 0.16);
-    --line-strong: rgba(25, 20, 13, 0.34);
-    --signal: #EC4A1B;
-    --signal-ink: #F6EFE2;
+    --paper: #F5F5F5;
+    --paper-2: #ECECEC;
+    --paper-3: #E1E1E1;
+    --ink: #0B0B0B;
+    --ink-soft: #2E2E2E;
+    --muted: #6E6E6E;
+    --line: rgba(11, 11, 11, 0.14);
+    --line-strong: rgba(11, 11, 11, 0.3);
+    --signal: #FF6B00;
+    --signal-deep: #E85E00;
+    --signal-ink: #120C06; /* texte posé sur l'orange (contraste fort) */
     --font-display: 'Unbounded', 'Space Grotesk', sans-serif;
     --font-body: 'Space Grotesk', -apple-system, 'Segoe UI', Roboto, sans-serif;
     --radius: 6px;
@@ -67,7 +70,7 @@ body.is-locked {
     left: 16px;
     z-index: 1200;
     background: var(--ink);
-    color: var(--signal-ink);
+    color: var(--paper);
     padding: 12px 18px;
     font-weight: 600;
     text-decoration: none;
@@ -78,11 +81,25 @@ body.is-locked {
     top: 12px;
 }
 
+/* ---------- Barre de progression (fonctionnelle, non décorative) ---------- */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 1100;
+    background: var(--signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    pointer-events: none;
+}
+
 /* ---------- Base typographique ---------- */
 .h-display {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2.1rem, 6vw, 4.2rem);
+    font-size: clamp(2.4rem, 6.4vw, 5rem);
     line-height: 1.02;
     letter-spacing: -0.02em;
     margin-bottom: 2rem;
@@ -131,21 +148,24 @@ body.is-locked {
 .btn--signal {
     background: var(--signal);
     color: var(--signal-ink);
-    box-shadow: 0 3px 0 var(--ink);
+    border-color: var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
 }
 
 .btn--signal:hover {
-    background: #dd3f11;
-    box-shadow: 0 6px 0 var(--ink);
+    background: var(--signal-deep);
+    box-shadow: 5px 5px 0 var(--ink);
 }
 
 .btn--ink {
     background: var(--ink);
-    color: var(--signal-ink);
+    color: var(--paper);
+    border-color: var(--ink);
 }
 
 .btn--ink:hover {
-    background: #000;
+    background: var(--signal-deep);
+    border-color: var(--signal-deep);
 }
 
 .btn--ghost {
@@ -167,7 +187,7 @@ body.is-locked {
 
 .btn--outline:hover {
     background: var(--ink);
-    color: var(--signal-ink);
+    color: var(--paper);
     border-color: var(--ink);
 }
 
@@ -216,7 +236,7 @@ body.is-locked {
     font-weight: 800;
     font-size: 1.35rem;
     letter-spacing: -0.02em;
-    color: var(--signal-ink);
+    color: var(--paper);
     text-decoration: none;
 }
 
@@ -230,7 +250,7 @@ body.is-locked {
 }
 
 .menu-desktop a {
-    color: rgba(246, 239, 226, 0.78);
+    color: rgba(245, 245, 245, 0.72);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.95rem;
@@ -253,7 +273,7 @@ body.is-locked {
 
 .menu-desktop a:hover,
 .menu-desktop a[aria-current="true"] {
-    color: var(--signal-ink);
+    color: var(--paper);
 }
 
 .menu-desktop a:hover::after,
@@ -264,6 +284,11 @@ body.is-locked {
 .nav__cta {
     padding: 10px 18px;
     font-size: 0.9rem;
+    border-color: var(--signal);
+}
+
+.nav__cta:hover {
+    box-shadow: 3px 3px 0 var(--signal);
 }
 
 .nav__toggle {
@@ -279,7 +304,7 @@ body.is-locked {
 .nav__toggle span {
     width: 24px;
     height: 3px;
-    background: var(--signal-ink);
+    background: var(--paper);
     border-radius: 2px;
     transition: transform 0.25s ease, opacity 0.25s ease;
 }
@@ -348,9 +373,54 @@ body.is-locked {
 /* ---------- Hero ---------- */
 .hero {
     position: relative;
+    isolation: isolate; /* scope le z-index:-1 du mot fantôme : juste derrière le contenu, devant le fond */
     padding: clamp(130px, 18vh, 190px) 0 clamp(60px, 8vh, 90px);
     background: var(--paper);
     overflow: hidden;
+}
+
+/* Grille éditoriale très légère, dans l'esprit d'une maquette print.
+   Intentionnelle (mise en page), discrète, jamais saturante. */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 100% 120px, 120px 100%;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 78%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 78%);
+    pointer-events: none;
+}
+
+/* Mot fantôme géant en contour orange — signature du hero.
+   z-index négatif + opacité douce pour rester un vrai fond, jamais au-dessus
+   des preuves / du lead (qui restent lisibles). */
+.hero::after {
+    content: 'WANY.';
+    position: absolute;
+    left: -0.02em;
+    bottom: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(6.5rem, 26vw, 22rem);
+    line-height: 0.7;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    color: rgba(11, 11, 11, 0.05);
+    opacity: 1;
+    pointer-events: none;
+    user-select: none;
+    z-index: -1;
+}
+
+@supports (-webkit-text-stroke: 1px #000) or (text-stroke: 1px #000) {
+    .hero::after {
+        color: transparent;
+        -webkit-text-stroke: 2px var(--signal);
+        opacity: 0.15;
+    }
 }
 
 /* Repères de coupe "print" */
@@ -359,6 +429,7 @@ body.is-locked {
     width: 26px;
     height: 26px;
     pointer-events: none;
+    z-index: 1;
 }
 
 .crop::before,
@@ -389,7 +460,7 @@ body.is-locked {
 
 .hero__inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: 1120px;
 }
 
@@ -399,11 +470,12 @@ body.is-locked {
     font-weight: 500;
     font-size: 0.85rem;
     letter-spacing: 0.04em;
-    color: var(--muted);
+    color: var(--ink-soft);
     text-transform: uppercase;
     padding: 9px 14px;
     border: 1px solid var(--line-strong);
-    border-radius: var(--radius);
+    border-left: 4px solid var(--signal);
+    border-radius: 0 var(--radius) var(--radius) 0;
     margin-bottom: 30px;
     background: var(--paper-2);
 }
@@ -411,10 +483,10 @@ body.is-locked {
 .hero__title {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2.6rem, 8.4vw, 6.4rem);
+    font-size: clamp(2.8rem, 9vw, 6.8rem);
     line-height: 0.98;
     letter-spacing: -0.03em;
-    max-width: 15ch;
+    max-width: 13ch;
     margin-bottom: 30px;
 }
 
@@ -473,10 +545,10 @@ body.is-locked {
 /* ---------- Ticker ---------- */
 .ticker {
     background: var(--ink);
-    color: var(--signal-ink);
+    color: var(--paper);
     overflow: hidden;
-    border-top: 2px solid var(--signal);
-    border-bottom: 2px solid var(--signal);
+    border-top: 3px solid var(--signal);
+    border-bottom: 3px solid var(--signal);
     padding: 14px 0;
 }
 
@@ -518,11 +590,45 @@ body.is-locked {
 
 /* ---------- Sections génériques ---------- */
 .section {
+    position: relative;
     padding: clamp(80px, 11vw, 140px) 0;
 }
 
 .section + .section {
     border-top: 1px solid var(--line);
+}
+
+/* Le contenu reste au-dessus des filigranes. */
+.section > .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Numéro de section géant en filigrane — motif éditorial "registration". */
+.section[data-num]::before {
+    content: attr(data-num);
+    position: absolute;
+    top: clamp(30px, 5vw, 60px);
+    right: clamp(0px, 3vw, 44px);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(7rem, 20vw, 18rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--paper-3);
+    pointer-events: none;
+    user-select: none;
+    transform: translateY(0.06em);
+    z-index: 0;
+}
+
+.contact[data-num]::before {
+    color: rgba(245, 245, 245, 0.16);
+}
+
+/* Blocs projets hors .container : on les mène au-dessus du filigrane. */
+.creations .work {
+    z-index: 1;
 }
 
 .section-head {
@@ -534,18 +640,20 @@ body.is-locked {
     font-size: 0.82rem;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--signal);
+    color: var(--ink-soft);
     margin-bottom: 18px;
 }
 
 .section-head span {
-    color: var(--muted);
+    color: var(--signal);
+    font-family: var(--font-display);
+    font-weight: 600;
 }
 
 .section-head::after {
     content: '';
     flex: 0 0 40px;
-    height: 2px;
+    height: 3px;
     background: var(--signal);
 }
 
@@ -554,7 +662,11 @@ body.is-locked {
 }
 
 .section-head--light span {
-    color: rgba(246, 239, 226, 0.6);
+    color: var(--signal-ink);
+}
+
+.section-head--light::after {
+    background: var(--signal-ink);
 }
 
 /* ---------- Studio ---------- */
@@ -580,6 +692,7 @@ body.is-locked {
 
 .studio__label span {
     color: var(--signal);
+    font-family: var(--font-display);
 }
 
 .studio__cols {
@@ -612,6 +725,7 @@ body.is-locked {
 .studio__principes strong {
     font-weight: 700;
     white-space: nowrap;
+    color: var(--ink);
 }
 
 .studio__principes span {
@@ -625,7 +739,7 @@ body.is-locked {
 
 .services__list {
     list-style: none;
-    border-top: 2px solid var(--ink);
+    border-top: 3px solid var(--ink);
 }
 
 .service {
@@ -633,9 +747,34 @@ body.is-locked {
     grid-template-columns: 90px 1fr 1.4fr;
     gap: 24px;
     align-items: baseline;
-    padding: 30px 8px;
+    padding: 30px 52px 30px 8px;
     border-bottom: 1px solid var(--line-strong);
     cursor: default;
+    position: relative;
+    overflow: hidden;
+    transition: padding-left 0.25s ease, background 0.25s ease;
+}
+
+.service::after {
+    content: '→';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%) translateX(140%);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--signal);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service:hover {
+    padding-left: 20px;
+    background: var(--paper-3);
+}
+
+.service:hover::after {
+    transform: translateY(-50%) translateX(0);
 }
 
 .service__num {
@@ -643,6 +782,7 @@ body.is-locked {
     font-weight: 600;
     font-size: 1rem;
     color: var(--signal);
+    transition: transform 0.2s ease;
 }
 
 .service__name {
@@ -665,10 +805,6 @@ body.is-locked {
     transform: translateX(4px);
 }
 
-.service__num {
-    transition: transform 0.2s ease;
-}
-
 /* ---------- Créations ---------- */
 .creations {
     background: var(--paper);
@@ -682,6 +818,7 @@ body.is-locked {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: clamp(28px, 5vw, 70px);
+    position: relative;
     align-items: center;
     padding: clamp(50px, 7vw, 84px) 24px;
     max-width: 1200px;
@@ -724,10 +861,10 @@ body.is-locked {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 16px 40px rgba(25, 20, 13, 0.16);
+    box-shadow: 4px 4px 0 var(--ink);
 }
 
-/* Petite découpe anguleuse "print" */
+/* Petit coin replié "print" */
 .monogram::after {
     content: '';
     position: absolute;
@@ -779,7 +916,7 @@ body.is-locked {
     background: var(--paper-3);
     border: 2px solid var(--ink);
     border-radius: var(--radius);
-    box-shadow: 0 14px 30px rgba(25, 20, 13, 0.18);
+    box-shadow: 4px 4px 0 rgba(11, 11, 11, 0.25);
 }
 
 .wire__card {
@@ -794,6 +931,34 @@ body.is-locked {
 
 .work__content {
     padding-top: 10px;
+}
+
+.work__index {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 16px;
+    transition: color 0.25s ease, -webkit-text-stroke-color 0.25s ease;
+}
+
+.work:hover .work__index {
+    color: var(--signal);
+}
+
+@supports ((-webkit-text-stroke: 1px #000) or (text-stroke: 1px #000)) {
+    .work__index {
+        color: transparent;
+        -webkit-text-stroke: 1.5px var(--ink);
+    }
+
+    .work:hover .work__index {
+        color: var(--signal);
+        -webkit-text-stroke-color: var(--signal);
+    }
 }
 
 .work__tag {
@@ -822,11 +987,16 @@ body.is-locked {
     font-size: 1.02rem;
     border-bottom: 2px solid var(--signal);
     padding-bottom: 2px;
+    transition: color 0.18s ease;
 }
 
 .work__link span {
     font-size: 1.2em;
     transition: transform 0.2s ease;
+}
+
+.work__link:hover {
+    color: var(--signal-deep);
 }
 
 .work__link:hover span {
@@ -842,7 +1012,7 @@ body.is-locked {
     list-style: none;
     counter-reset: step;
     margin: 10px 0 36px;
-    border-top: 2px solid var(--ink);
+    border-top: 3px solid var(--ink);
 }
 
 .process__item {
@@ -851,6 +1021,12 @@ body.is-locked {
     gap: 26px;
     padding: 28px 8px;
     border-bottom: 1px solid var(--line-strong);
+    transition: padding-left 0.2s ease, background 0.2s ease;
+}
+
+.process__item:hover {
+    padding-left: 18px;
+    background: var(--paper-3);
 }
 
 .process__num {
@@ -878,7 +1054,7 @@ body.is-locked {
     gap: 20px;
     align-items: center;
     background: var(--ink);
-    color: var(--signal-ink);
+    color: var(--paper);
     border-left: 6px solid var(--signal);
     padding: 22px 26px;
     border-radius: var(--radius);
@@ -888,7 +1064,7 @@ body.is-locked {
 
 .process__note strong {
     font-weight: 700;
-    color: var(--signal-ink);
+    color: var(--paper);
 }
 
 .process__note-ico {
@@ -910,7 +1086,7 @@ body.is-locked {
 
 .contact__lead {
     font-size: clamp(1.05rem, 1.6vw, 1.35rem);
-    color: rgba(246, 239, 226, 0.92);
+    color: var(--signal-ink);
     max-width: 54ch;
     margin-bottom: 40px;
 }
@@ -921,10 +1097,46 @@ body.is-locked {
     gap: 18px;
 }
 
+.contact__email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.3rem, 5vw, 3.1rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--signal-ink);
+    text-decoration: none;
+    border-bottom: 5px solid var(--signal-ink);
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+    width: fit-content;
+}
+
+.contact__email span {
+    font-size: 0.9em;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.contact__email:hover {
+    background: var(--signal-ink);
+    color: var(--signal);
+}
+
+.contact__email:hover span {
+    transform: translateX(7px);
+}
+
+.contact a:focus-visible {
+    outline-color: var(--signal-ink);
+}
+
 /* ---------- Footer ---------- */
 .footer {
     background: var(--ink);
-    color: rgba(246, 239, 226, 0.75);
+    color: rgba(245, 245, 245, 0.72);
     padding: 70px 0 40px;
 }
 
@@ -942,13 +1154,13 @@ body.is-locked {
 }
 
 .footer__nav a {
-    color: rgba(246, 239, 226, 0.75);
+    color: rgba(245, 245, 245, 0.72);
     text-decoration: none;
     font-weight: 500;
 }
 
 .footer__nav a:hover {
-    color: var(--signal-ink);
+    color: var(--signal);
 }
 
 .footer__meta {
@@ -958,7 +1170,7 @@ body.is-locked {
     flex-wrap: wrap;
     gap: 12px;
     padding-top: 30px;
-    border-top: 1px solid rgba(246, 239, 226, 0.15);
+    border-top: 1px solid rgba(245, 245, 245, 0.15);
     margin-top: 50px;
     font-size: 0.9rem;
 }
@@ -1000,6 +1212,7 @@ body.is-locked {
 .back-to-top:hover {
     background: var(--signal);
     color: var(--signal-ink);
+    border-color: var(--signal);
 }
 
 /* ---------- Animation reveal ---------- */
@@ -1050,6 +1263,10 @@ body.is-locked {
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
+    }
+
+    .scroll-progress {
+        display: none;
     }
 
     * {

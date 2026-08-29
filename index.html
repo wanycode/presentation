@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wany — Créateur web de 16 ans, sites pour coachs sportifs</title>
     <meta name="description" content="Wany, créateur web de 16 ans. Des sites modernes, rapides et sur-mesure pour les coachs sportifs et les pros. Vitrines, landing pages, apps de coaching. Modifications illimitées.">
-    <meta name="theme-color" content="#F4EFE6">
+    <meta name="theme-color" content="#F5F5F5">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -39,6 +39,9 @@
 <body>
 
     <a class="skip-link" href="#main">Aller au contenu</a>
+
+    <!-- Barre de progression : indique visuellement la position de lecture -->
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
     <!-- ===== NAVIGATION ===== -->
     <header class="nav" id="top">
@@ -116,7 +119,7 @@
         </div>
 
         <!-- ===== STUDIO / À PROPOS ===== -->
-        <section id="studio" class="studio section" aria-labelledby="studio-title">
+        <section id="studio" class="studio section" aria-labelledby="studio-title" data-num="01">
             <div class="container studio__grid">
                 <p class="studio__label reveal"><span>01</span> — Studio</p>
                 <div class="studio__body">
@@ -139,7 +142,7 @@
         </section>
 
         <!-- ===== SERVICES ===== -->
-        <section id="services" class="services section" aria-labelledby="services-title">
+        <section id="services" class="services section" aria-labelledby="services-title" data-num="02">
             <div class="container">
                 <p class="section-head reveal"><span>02</span> — Ce que je crée</p>
                 <h2 class="h-display reveal" id="services-title">Six façons<br>de te faire voir.</h2>
@@ -180,7 +183,7 @@
         </section>
 
         <!-- ===== CRÉATIONS ===== -->
-        <section id="creations" class="creations section" aria-labelledby="creations-title">
+        <section id="creations" class="creations section" aria-labelledby="creations-title" data-num="03">
             <div class="container">
                 <p class="section-head reveal"><span>03</span> — Créations</p>
                 <h2 class="h-display reveal" id="creations-title">Trois projets,<br>trois personnalités.</h2>
@@ -196,7 +199,8 @@
                     <div class="wire reveal"><div class="wire__card wire__card--a"></div><div class="wire__card wire__card--b"></div></div>
                 </div>
                 <div class="work__content reveal">
-                    <p class="work__tag">Coaching sportif &amp; nutrition — 001</p>
+                    <span class="work__index">001</span>
+                    <p class="work__tag">Coaching sportif &amp; nutrition</p>
                     <h3 class="h3">Coach Barbie</h3>
                     <p class="work__desc">Un site complet pour une coach sportive&nbsp;: présentation, programmes, nutrition sur-mesure et espace élève privé avec paiement sécurisé.</p>
                     <a href="https://wanycode.github.io/coach-barbie/" target="_blank" rel="noopener" class="work__link">Voir le projet<span aria-hidden="true">→</span></a>
@@ -213,7 +217,8 @@
                     <div class="wire reveal"><div class="wire__card wire__card--a"></div><div class="wire__card wire__card--b"></div></div>
                 </div>
                 <div class="work__content reveal">
-                    <p class="work__tag">Coach nutrition — 002</p>
+                    <span class="work__index">002</span>
+                    <p class="work__tag">Coach nutrition</p>
                     <h3 class="h3">Nono Coach Nutrition</h3>
                     <p class="work__desc">Un site clair et motivant&nbsp;: accompagnement pas à pas, formules, tarifs et questions fréquentes.</p>
                     <a href="https://wanycode.github.io/coach-nono/" target="_blank" rel="noopener" class="work__link">Voir le projet<span aria-hidden="true">→</span></a>
@@ -230,7 +235,8 @@
                     <div class="wire reveal"><div class="wire__card wire__card--a"></div><div class="wire__card wire__card--b"></div></div>
                 </div>
                 <div class="work__content reveal">
-                    <p class="work__tag">App de coaching premium — 003</p>
+                    <span class="work__index">003</span>
+                    <p class="work__tag">App de coaching premium</p>
                     <h3 class="h3">YujiroGrind</h3>
                     <p class="work__desc">Une plateforme de gestion pour coachs&nbsp;: clients, séances, volume de charge et suivi de progression.</p>
                     <a href="https://wanycode.github.io/yujirogrind/" target="_blank" rel="noopener" class="work__link">Voir le projet<span aria-hidden="true">→</span></a>
@@ -239,7 +245,7 @@
         </section>
 
         <!-- ===== PROCESSUS ===== -->
-        <section id="process" class="process section" aria-labelledby="process-title">
+        <section id="process" class="process section" aria-labelledby="process-title" data-num="04">
             <div class="container">
                 <p class="section-head reveal"><span>04</span> — Processus</p>
                 <h2 class="h-display reveal" id="process-title">De l'idée<br>au site clé en main.</h2>
@@ -271,13 +277,14 @@
         </section>
 
         <!-- ===== CONTACT ===== -->
-        <section id="contact" class="contact section" aria-labelledby="contact-title">
+        <section id="contact" class="contact section" aria-labelledby="contact-title" data-num="05">
             <div class="container">
                 <p class="section-head section-head--light reveal"><span>05</span> — Contact</p>
                 <h2 class="h-display h-display--light reveal" id="contact-title">Ton prochain site<br>commence ici.</h2>
                 <p class="contact__lead reveal">
                     Une idée, un projet, ou juste envie de discuter&nbsp;? Écris-moi. Je réponds généralement en moins de 24&nbsp;heures.
                 </p>
+                <a class="contact__email reveal" href="mailto:ytop3sinj@gmail.com">ytop3sinj@gmail.com<span aria-hidden="true">→</span></a>
                 <div class="contact__actions reveal">
                     <a href="mailto:ytop3sinj@gmail.com" class="btn btn--ink btn--lg">Commencer mon projet<span aria-hidden="true">→</span></a>
                     <a href="https://instagram.com/wn.1r3" target="_blank" rel="noopener" class="btn btn--outline btn--lg">@wn.1r3</a>
