@@ -28,7 +28,7 @@ Pour changer le visuel d'un projet, remplacez `p-barbie` par `p-nono` ou `p-yuji
 
 Les liens de contact sont dans la section `<section id="contact">` :
 
-- **Email** : `mailto:ytop3sinj@gmail.com`
+- **Email** : `mailto:ytop2sinj@gmail.com`
 - **Instagram** : `https://instagram.com/wn.1r3`
 
 ### Modifier les informations de base

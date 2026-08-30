@@ -43,6 +43,91 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* ---------- Scrollbar sportive (chrome natif) ---------- */
+html {
+    scrollbar-color: var(--signal) var(--ink);
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--ink);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--signal);
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--signal-deep);
+}
+
+
+/* ---------- Grain de film (texture print, subtile et contenue) ----------
+   NOTE : on garde inset:0 (strictement le viewport) et on anime la position
+   du fond, PAS un transform sur un layer géant — plus de voile qui dépasse. */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+    background-size: 240px 240px;
+    opacity: 0.03;
+    animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+    0%, 100% { background-position: 0 0; }
+    20% { background-position: -30px -20px; }
+    40% { background-position: 22px -34px; }
+    60% { background-position: -26px 26px; }
+    80% { background-position: 30px 12px; }
+}
+
+/* ---------- Curseur signature (anneau orange qui traîne) ---------- */
+.cursor__ring {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10000;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--signal);
+    border-radius: 50%;
+    background: transparent;
+    pointer-events: none;
+    opacity: 1;
+    will-change: transform;
+    transform: translate(-200px, -200px); /* démarre hors écran */
+    transition: width 0.28s ease, height 0.28s ease, background 0.28s ease,
+                border-color 0.28s ease, opacity 0.3s ease;
+}
+
+.cursor__ring.is-hover {
+    width: 46px;
+    height: 46px;
+    background: rgba(255, 107, 0, 0.13);
+    border-color: var(--signal);
+}
+
+.cursor__ring.is-down {
+    width: 22px;
+    height: 22px;
+    background: var(--signal);
+    border-color: var(--signal);
+}
+
+.cursor__ring.is-hidden {
+    opacity: 0;
+}
+
 body.is-locked {
     overflow: hidden;
 }
@@ -59,7 +144,7 @@ body.is-locked {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 24px;
 }
@@ -120,6 +205,8 @@ body.is-locked {
 
 /* ---------- Boutons ---------- */
 .btn {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -135,6 +222,29 @@ body.is-locked {
     transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease,
                 border-color 0.18s ease, box-shadow 0.18s ease;
     white-space: nowrap;
+}
+
+/* Reflet qui balaye le bouton au survol. */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -130%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.btn:hover::after {
+    left: 135%;
+}
+
+.btn > * {
+    position: relative;
+    z-index: 1;
 }
 
 .btn:hover {
@@ -214,6 +324,7 @@ body.is-locked {
     right: 0;
     z-index: 1000;
     background: var(--ink);
+    border-bottom: 1px solid rgba(255, 107, 0, 0.35);
     transition: transform 0.3s ease;
 }
 
@@ -222,7 +333,7 @@ body.is-locked {
 }
 
 .nav__inner {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 16px 24px;
     display: flex;
@@ -238,6 +349,27 @@ body.is-locked {
     letter-spacing: -0.02em;
     color: var(--paper);
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: letter-spacing 0.25s ease, transform 0.25s ease;
+}
+
+.nav__logo::before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    margin-right: 10px;
+    background: var(--signal);
+    transform: rotate(45deg);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav__logo:hover {
+    letter-spacing: 0.01em;
+}
+
+.nav__logo:hover::before {
+    transform: rotate(225deg);
 }
 
 .nav__logo-dot {
@@ -247,6 +379,7 @@ body.is-locked {
 .menu-desktop {
     display: flex;
     gap: 34px;
+    counter-reset: menu;
 }
 
 .menu-desktop a {
@@ -256,6 +389,19 @@ body.is-locked {
     font-size: 0.95rem;
     position: relative;
     padding: 4px 0;
+}
+
+/* Index éditorial numéroté devant chaque lien de la nav desktop. */
+.menu-desktop a::before {
+    content: '0' counter(menu);
+    counter-increment: menu;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.66em;
+    color: var(--signal);
+    vertical-align: super;
+    margin-right: 7px;
+    letter-spacing: 0;
 }
 
 .menu-desktop a::after {
@@ -328,6 +474,7 @@ body.is-locked {
     position: fixed;
     inset: 0;
     z-index: 900;
+    isolation: isolate; /* scope le z-index:-1 du filigrane : toujours derrière le contenu */
     background: var(--paper);
     padding: 110px 28px 40px;
     display: flex;
@@ -368,6 +515,81 @@ body.is-locked {
     font-weight: 500;
     text-decoration: none;
     border-bottom: 2px solid var(--signal);
+}
+
+/* ---------- Rail index latéral (desktop) ---------- */
+.side-index {
+    position: fixed;
+    left: 26px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 700;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+}
+
+.side-index::before {
+    content: '';
+    position: absolute;
+    top: -56px;
+    bottom: -56px;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: var(--line);
+}
+
+.side-index a {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--line-strong);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--muted);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-decoration: none;
+    transition: border-color 0.25s ease, color 0.25s ease,
+                background 0.25s ease, transform 0.2s ease;
+}
+
+.side-index a:hover {
+    border-color: var(--signal);
+    color: var(--signal);
+    transform: translateX(3px);
+}
+
+.side-index a[aria-current="true"] {
+    border-color: var(--signal);
+    background: var(--signal);
+    color: var(--signal-ink);
+}
+
+.side-index::after {
+    content: 'MENU';
+    position: absolute;
+    bottom: -72px;
+    left: 50%;
+    transform: translateX(-50%);
+    writing-mode: vertical-rl;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+}
+
+@media (min-width: 1300px) {
+    .side-index {
+        display: flex;
+    }
 }
 
 /* ---------- Hero ---------- */
@@ -483,25 +705,24 @@ body.is-locked {
 .hero__title {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2.8rem, 9vw, 6.8rem);
-    line-height: 0.98;
-    letter-spacing: -0.03em;
-    max-width: 13ch;
+    font-size: clamp(2.7rem, 9.5vw, 7.4rem);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+    max-width: 12ch;
     margin-bottom: 30px;
 }
 
 .hero__title em {
     font-style: italic;
-    color: var(--signal);
-    border-bottom: 0.06em solid currentColor;
-    white-space: nowrap;
-}
-
-.hero__title sup {
-    font-size: 0.32em;
-    vertical-align: super;
     color: var(--ink);
-    margin-left: 2px;
+    /* Coup de surligneur fin (bas ~40% de la ligne), pas une grosse barre.
+       box-decoration-break: clone = la marque se répète proprement à chaque ligne. */
+    background: linear-gradient(to bottom, transparent 66%, var(--signal) 66%);
+    padding: 0 0.06em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    white-space: normal; /* plus de coupure sur mobile : la phrase passe à la ligne */
 }
 
 .hero__lead {
@@ -541,6 +762,88 @@ body.is-locked {
     background: var(--signal);
     flex-shrink: 0;
 }
+
+/* Rangée "coordonnées" éditoriale tout en bas du hero. */
+.hero__meta {
+    margin-top: clamp(36px, 7vh, 64px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 18px;
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.hero__meta-rule {
+    flex: 1;
+    max-width: 120px;
+    height: 1px;
+    background: var(--line-strong);
+    position: relative;
+}
+
+.hero__meta-rule::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    transform: translateY(-50%);
+    background: var(--signal);
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.hero__meta span:last-child {
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Tampon circulaire “print” qui tourne lentement, signature du hero. */
+.hero__stamp {
+    position: absolute;
+    right: clamp(30px, 8vw, 130px);
+    bottom: clamp(30px, 9vh, 90px);
+    width: clamp(120px, 16vw, 200px);
+    height: auto;
+    z-index: 3;
+    animation: spin 16s linear infinite;
+    will-change: transform;
+    color: var(--signal);
+}
+
+.hero__stamp-text {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    fill: var(--signal);
+}
+
+.hero__stamp-ico {
+    fill: none;
+    stroke: var(--signal);
+    stroke-width: 2.5;
+}
+
+.hero__stamp-mark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 30px;
+    fill: var(--signal);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
 
 /* ---------- Ticker ---------- */
 .ticker {
@@ -609,17 +912,55 @@ body.is-locked {
     content: attr(data-num);
     position: absolute;
     top: clamp(30px, 5vw, 60px);
-    right: clamp(0px, 3vw, 44px);
+    right: clamp(6px, 3.5vw, 52px);
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(7rem, 20vw, 18rem);
+    font-size: clamp(8rem, 22vw, 19rem);
     line-height: 1;
     letter-spacing: -0.04em;
     color: var(--paper-3);
     pointer-events: none;
     user-select: none;
-    transform: translateY(0.06em);
+    transform: translateY(0.06em) rotate(3deg);
     z-index: 0;
+    opacity: 0.9;
+}
+
+@supports ((-webkit-text-stroke: 1px #000) or (text-stroke: 1px #000)) {
+    .section[data-num]::before {
+        color: transparent;
+        -webkit-text-stroke: 2px var(--line-strong);
+        opacity: 0.55;
+    }
+
+    /* Le numéro du contact reste un fantôme clair sur le fond orange. */
+    .contact[data-num]::before {
+        -webkit-text-stroke: 2px rgba(245, 245, 245, 0.4);
+        opacity: 0.6;
+    }
+}
+
+/* Parallaxe douce pilotée par le scroll (amélioration progressive). */
+@supports (animation-timeline: scroll()) {
+    .hero::after {
+        animation: heroRise linear both;
+        animation-timeline: scroll();
+    }
+
+    .section[data-num]::before {
+        animation: numRise linear both;
+        animation-timeline: scroll();
+    }
+}
+
+@keyframes heroRise {
+    from { transform: translateY(9vh); }
+    to { transform: translateY(-9vh); }
+}
+
+@keyframes numRise {
+    from { transform: translateY(0.06em) rotate(3deg); }
+    to { transform: translateY(-0.14em) rotate(3deg); }
 }
 
 .contact[data-num]::before {
@@ -655,6 +996,9 @@ body.is-locked {
     flex: 0 0 40px;
     height: 3px;
     background: var(--signal);
+    margin-right: 4px;
+    box-shadow: 55px 0 0 0 var(--signal);
+    max-width: 160px;
 }
 
 .section-head--light {
@@ -752,7 +1096,35 @@ body.is-locked {
     cursor: default;
     position: relative;
     overflow: hidden;
+    background: transparent;
     transition: padding-left 0.25s ease, background 0.25s ease;
+}
+
+/* Zébra sportif : ligne paire teintée d'orange très légère. */
+.service:nth-child(even) {
+    background: rgba(255, 107, 0, 0.045);
+}
+
+/* Numéro avec pastille carrée signal. */
+.service__num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--signal);
+    position: relative;
+    padding-left: 18px;
+    transition: transform 0.2s ease;
+}
+
+.service__num::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    background: var(--signal);
+    transform: translateY(-50%) rotate(45deg);
 }
 
 .service::after {
@@ -770,19 +1142,19 @@ body.is-locked {
 
 .service:hover {
     padding-left: 20px;
-    background: var(--paper-3);
+    background: rgba(255, 107, 0, 0.09);
 }
 
 .service:hover::after {
     transform: translateY(-50%) translateX(0);
 }
 
-.service__num {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--signal);
-    transition: transform 0.2s ease;
+.service:hover .service__num {
+    transform: translateX(4px);
+}
+
+.service:hover .service__num::before {
+    background: var(--ink);
 }
 
 .service__name {
@@ -800,11 +1172,6 @@ body.is-locked {
 .service:hover .service__name {
     color: var(--signal);
 }
-
-.service:hover .service__num {
-    transform: translateX(4px);
-}
-
 /* ---------- Créations ---------- */
 .creations {
     background: var(--paper);
@@ -862,6 +1229,13 @@ body.is-locked {
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.work:hover .monogram {
+    transform: translateY(-5px);
+    box-shadow: 7px 9px 0 var(--ink);
 }
 
 /* Petit coin replié "print" */
@@ -980,26 +1354,41 @@ body.is-locked {
 .work__link {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
+    gap: 12px;
     font-weight: 700;
     color: var(--ink);
     text-decoration: none;
     font-size: 1.02rem;
-    border-bottom: 2px solid var(--signal);
     padding-bottom: 2px;
-    transition: color 0.18s ease;
+    background-image: linear-gradient(var(--signal), var(--signal));
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    background-position: left bottom;
+    transition: color 0.2s ease, background-size 0.25s ease;
 }
 
 .work__link span {
-    font-size: 1.2em;
-    transition: transform 0.2s ease;
+    display: inline-grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    font-size: 1.05rem;
+    line-height: 1;
+    transition: background 0.25s ease, color 0.25s ease,
+                transform 0.25s ease, border-color 0.25s ease;
 }
 
 .work__link:hover {
     color: var(--signal-deep);
+    background-size: 100% 2px;
 }
 
 .work__link:hover span {
+    background: var(--signal);
+    border-color: var(--signal);
+    color: var(--signal-ink);
     transform: translateX(5px);
 }
 
@@ -1034,7 +1423,33 @@ body.is-locked {
     font-weight: 700;
     font-size: 1.9rem;
     color: var(--signal);
-    border-right: 2px solid var(--line-strong);
+    position: relative;
+    padding-left: 26px;
+}
+
+/* Connecteur : pastille puis trait horizontal vers le titre. */
+.process__num::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 10px;
+    height: 10px;
+    background: var(--signal);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.process__num::after {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0.55em;
+    width: 34px;
+    height: 2px;
+    background: var(--line-strong);
+    opacity: 0.5;
+    transform: translateY(-50%);
 }
 
 .process__txt h3 {
@@ -1074,8 +1489,11 @@ body.is-locked {
 }
 
 /* ---------- Contact ---------- */
+/* fond orange + halftone discret (pointillés), en cohérence sport/print. */
 .contact {
-    background: var(--signal);
+    background: var(--signal)
+        radial-gradient(rgba(18, 12, 6, 0.09) 1px, transparent 1.5px);
+    background-size: 22px 22px;
     color: var(--signal-ink);
 }
 
@@ -1115,18 +1533,17 @@ body.is-locked {
 }
 
 .contact__email span {
-    font-size: 0.9em;
+    display: inline-grid;
+    place-items: center;
+    width: 0.95em;
+    height: 0.95em;
+    flex-shrink: 0;
     line-height: 1;
     transition: transform 0.2s ease;
 }
 
-.contact__email:hover {
-    background: var(--signal-ink);
-    color: var(--signal);
-}
-
 .contact__email:hover span {
-    transform: translateX(7px);
+    transform: translateX(6px);
 }
 
 .contact a:focus-visible {
@@ -1135,9 +1552,34 @@ body.is-locked {
 
 /* ---------- Footer ---------- */
 .footer {
+    position: relative;
+    overflow: hidden;
     background: var(--ink);
     color: rgba(245, 245, 245, 0.72);
     padding: 70px 0 40px;
+}
+
+/* Mot fantôme géant en contour, signature de fin de page. */
+.footer::after {
+    content: 'WANY.';
+    position: absolute;
+    right: -0.04em;
+    bottom: -0.42em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(6rem, 26vw, 20rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(245, 245, 245, 0.07);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.footer .container {
+    position: relative;
+    z-index: 1;
 }
 
 .footer__inner {
@@ -1154,13 +1596,32 @@ body.is-locked {
 }
 
 .footer__nav a {
+    position: relative;
     color: rgba(245, 245, 245, 0.72);
     text-decoration: none;
     font-weight: 500;
+    padding-bottom: 3px;
+}
+
+.footer__nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
 }
 
 .footer__nav a:hover {
     color: var(--signal);
+}
+
+.footer__nav a:hover::after {
+    transform: scaleX(1);
 }
 
 .footer__meta {
@@ -1190,7 +1651,7 @@ body.is-locked {
     width: 48px;
     height: 48px;
     border-radius: var(--radius);
-    border: 2px solid var(--ink);
+    border: none;
     background: var(--paper);
     color: var(--ink);
     font-size: 1.2rem;
@@ -1203,6 +1664,30 @@ body.is-locked {
     transition: opacity 0.25s ease, transform 0.25s ease, background 0.18s ease;
 }
 
+/* Jauge de progression de lecture autour du bouton (conic-gradient). */
+.back-to-top::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    padding: 3px;
+    border-radius: var(--radius);
+    background: conic-gradient(var(--signal) calc(var(--p, 0) * 1deg), var(--line) 0deg);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.back-to-top::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: var(--radius);
+    border: 2px solid var(--line);
+    pointer-events: none;
+}
+
 .back-to-top.show {
     opacity: 1;
     pointer-events: auto;
@@ -1213,6 +1698,7 @@ body.is-locked {
     background: var(--signal);
     color: var(--signal-ink);
     border-color: var(--signal);
+    transform: translateY(-3px);
 }
 
 /* ---------- Animation reveal ---------- */
@@ -1220,15 +1706,18 @@ body.is-locked {
    <html> porte la classe .js ajoutée de façon synchrone dans le <head>. */
 .js .reveal {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(26px);
+    filter: blur(6px);
     transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform, filter;
 }
 
 .reveal.in {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
 }
 
 /* Respiration douce du hero au chargement */
@@ -1236,6 +1725,428 @@ body.is-locked {
 .hero__lead.reveal   { transition-delay: 0.13s; }
 .hero__actions.reveal { transition-delay: 0.21s; }
 .hero__proof.reveal  { transition-delay: 0.29s; }
+
+/* ============================================================
+   POLISH UI — petits détails denses, cohérents avec l'identité
+   print & sport. Tout est désactivé sous prefers-reduced-motion.
+   ============================================================ */
+
+/* Séparateur losange entre sections. */
+.section + .section::after {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: 13px;
+    height: 13px;
+    transform: translateX(-50%) rotate(45deg);
+    background: var(--ink);
+    border: 2px solid var(--paper);
+    z-index: 2;
+}
+
+.contact::after {
+    background: var(--signal);
+    border-color: var(--signal);
+}
+
+/* Studio — lignes de principes avec hover éditorial. */
+.studio__principes p {
+    position: relative;
+    transition: padding-left 0.25s ease, background 0.25s ease;
+}
+
+.studio__principes p::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    width: 4px;
+    height: 0;
+    background: var(--signal);
+    transform: translateY(-50%);
+    transition: height 0.25s ease;
+}
+
+.studio__principes p:hover {
+    padding-left: 14px;
+    background: var(--paper-2);
+}
+
+.studio__principes p:hover::before {
+    height: 60%;
+}
+
+/* Services — monstrations de numéro filigrane au survol. */
+.services__list {
+    counter-reset: service;
+}
+
+.service > * {
+    position: relative;
+    z-index: 1;
+}
+
+.service::before {
+    counter-increment: service;
+    content: '0' counter(service);
+    position: absolute;
+    right: clamp(90px, 12vw, 170px);
+    top: 50%;
+    transform: translateY(-50%) translateX(24px);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(4rem, 10vw, 7.5rem);
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--line-strong);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 0;
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service:hover::before {
+    opacity: 0.5;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* Processus — épine verticale qui relie les étapes. */
+.process__list {
+    position: relative;
+}
+
+.process__list::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: repeating-linear-gradient(
+        to bottom,
+        var(--line-strong) 0 6px,
+        transparent 6px 12px
+    );
+    pointer-events: none;
+}
+
+.process__item { position: relative; }
+.process__item:hover .process__num::before {
+    background: var(--ink);
+}
+
+/* Monogrammes — reflet qui balaye le visuel. */
+.monogram {
+    overflow: hidden;
+}
+
+.monogram::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -45%;
+    width: 45%;
+    height: 160%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+    transform: translateX(-150%);
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.work:hover .monogram::before {
+    transform: translateX(330%);
+}
+
+/* Créations — contenu qui suit le survol + chip sur le tag. */
+.work__content {
+    transition: transform 0.3s ease;
+}
+
+.work:hover .work__content {
+    transform: translateX(6px);
+}
+
+.work__tag {
+    width: fit-content;
+    border-bottom: 2px solid var(--signal);
+    padding-bottom: 3px;
+    transition: color 0.2s ease;
+}
+
+.work:hover .work__tag {
+    color: var(--signal-deep);
+}
+
+/* Révélation en cascade des listes (services / processus). */
+.services__list .reveal { transition-delay: 0.02s; }
+.services__list .reveal:nth-child(2) { transition-delay: 0.06s; }
+.services__list .reveal:nth-child(3) { transition-delay: 0.1s; }
+.services__list .reveal:nth-child(4) { transition-delay: 0.14s; }
+.services__list .reveal:nth-child(5) { transition-delay: 0.18s; }
+.services__list .reveal:nth-child(6) { transition-delay: 0.22s; }
+.process__list .reveal:nth-child(2) { transition-delay: 0.06s; }
+.process__list .reveal:nth-child(3) { transition-delay: 0.12s; }
+.process__list .reveal:nth-child(4) { transition-delay: 0.18s; }
+
+/* Footer — lien de la barre méta avec underline animé. */
+.footer__meta a {
+    position: relative;
+}
+
+.footer__meta a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: var(--signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+}
+
+.footer__meta a:hover {
+    color: var(--paper);
+}
+
+.footer__meta a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Toast « email copié » (créé en JS). */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(18px);
+    background: var(--ink);
+    color: var(--signal);
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--signal);
+    font-weight: 600;
+    font-size: 0.9rem;
+    z-index: 10050;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   POLISH 2 — 20 micro-améliorations UI.
+   Cohérent print & sport ; tout est neutralisé en reduced-motion.
+   ============================================================ */
+
+/* 1. Pastille pulsante du kicker hero. */
+.hero__kicker::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 10px;
+    background: var(--signal);
+    border-radius: 50%;
+    vertical-align: 1px;
+    animation: pulseDot 2.2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.5); }
+    50% { opacity: 0.35; box-shadow: 0 0 0 7px rgba(255, 107, 0, 0); }
+}
+
+/* 2. Flèche du CTA hero dans une pastille qui se remplit. */
+.hero__actions .arrow {
+    display: inline-grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--signal-ink);
+    flex-shrink: 0;
+    font-size: 1.05rem;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.hero__actions .btn--signal:hover .arrow {
+    background: var(--ink);
+    color: var(--signal);
+    transform: translateX(4px);
+}
+
+/* 3. Sélection inversée sur les sections sombres / orange. */
+.footer ::selection,
+.contact ::selection {
+    background: var(--signal-ink);
+    color: var(--signal);
+}
+
+/* 4. Astérisque rotatif devant le numéro des en-têtes. */
+.section-head span::before {
+    content: '\2726';
+    display: inline-block;
+    margin-right: 6px;
+    color: var(--signal);
+    animation: spin 16s linear infinite;
+}
+
+/* 5. Filigrane géant WANY. dans le menu mobile. */
+.menu-mobile::before {
+    content: 'WANY.';
+    position: absolute;
+    right: 0.05em;
+    bottom: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(8rem, 42vw, 16rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--line-strong);
+    pointer-events: none;
+    user-select: none;
+    z-index: -1; /* derrière le contenu du menu (liens, email) */
+}
+
+/* 6. Alternance des repères du ticker (rond / losange). */
+.ticker__track i:nth-child(2n) {
+    border-radius: 2px;
+    transform: rotate(45deg);
+}
+
+/* 7. Retour-en-haut : le survol soulève (transform fusionné avec le hover
+de base ci-dessus), et l'actif enfonce légèrement. */
+.back-to-top:active {
+    transform: translateY(0) scale(0.94);
+}
+
+/* 8. Index numérotés dans les liens du footer. */
+.footer__nav {
+    counter-reset: fnav;
+}
+
+.footer__nav a::before {
+    content: '0' counter(fnav);
+    counter-increment: fnav;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.68em;
+    color: var(--signal);
+    vertical-align: super;
+    margin-right: 6px;
+    letter-spacing: 0;
+}
+
+/* 9. Logo footer qui s'enflamme au survol. */
+.footer__logo:hover {
+    color: var(--signal);
+}
+
+/* 10. Focus plus aéré et lisible. */
+:focus-visible {
+    outline-offset: 4px;
+}
+
+/* 11. Le trait des en-têtes se dessine à l'apparition. */
+.section-head::after {
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js .section-head:not(.in)::after {
+    transform: scaleX(0);
+}
+
+/* 12. Sous-lignage des noms de services au survol. */
+.service__name {
+    position: relative;
+}
+
+.service__name::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background: var(--signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.service:hover .service__name::after {
+    transform: scaleX(1);
+}
+
+/* 13. La note du processus se soulève au survol. */
+.process__note {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process__note:hover {
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 0 var(--signal);
+}
+
+/* 14. La fausse page (wire) flotte au survol du projet. */
+.wire {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.work:hover .wire {
+    transform: translateY(-7px);
+}
+
+/* 15. L'email du contact respire au survol. */
+.contact__email {
+    transition: letter-spacing 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.contact__email:hover {
+    letter-spacing: 0.008em;
+}
+
+/* 16. Les lettres des monogrammes se resserrent au survol. */
+.monogram__letters {
+    transition: letter-spacing 0.3s ease, transform 0.3s ease;
+}
+
+.work:hover .monogram__letters {
+    letter-spacing: -0.045em;
+}
+
+/* 17. Le ticker accélère quand on le survole. */
+.ticker:hover .ticker__track {
+    animation-duration: 7s;
+}
+
+/* 18. Le nom de domaine du monogramme s'intensifie. */
+.monogram__words {
+    transition: opacity 0.3s ease;
+}
+
+.work:hover .monogram__words {
+    opacity: 1;
+}
+
+/* 19. Section du rail index active : échelle + halo. */
+.side-index a[aria-current="true"] {
+    transform: scale(1.18);
+    box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.18);
+}
+
+/* 20. Feedback tactile sur mobile. */
+* {
+    -webkit-tap-highlight-color: rgba(255, 107, 0, 0.14);
+}
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -1262,7 +2173,20 @@ body.is-locked {
     .reveal {
         opacity: 1 !important;
         transform: none !important;
+        filter: none !important;
         transition: none !important;
+    }
+
+    /* Neutralise les animations décoratives (grain, tampon, parallaxe). */
+    body::before,
+    .hero__stamp,
+    .hero::after,
+    .section[data-num]::before {
+        animation: none !important;
+    }
+
+    .cursor__ring {
+        display: none;
     }
 
     .scroll-progress {
@@ -1286,6 +2210,10 @@ body.is-locked {
         display: flex;
     }
 
+    .hero__stamp {
+        display: none;
+    }
+
     .studio__grid {
         grid-template-columns: 1fr;
         gap: 6px;
@@ -1299,6 +2227,11 @@ body.is-locked {
     .service {
         grid-template-columns: 56px 1fr;
         gap: 14px;
+    }
+
+    /* Le grand fantôme numéroté ne sert que sur grand écran. */
+    .service::before {
+        display: none;
     }
 
     .service__desc {
@@ -1336,6 +2269,10 @@ body.is-locked {
         font-size: 0.74rem;
     }
 
+    .hero__meta {
+        font-size: 0.66rem;
+    }
+
     .hero__proof {
         gap: 14px;
         flex-direction: column;
@@ -1357,10 +2294,6 @@ body.is-locked {
     .process__item {
         grid-template-columns: 1fr;
         gap: 10px;
-    }
-
-    .process__num {
-        border-right: none;
     }
 
     .process__note {
