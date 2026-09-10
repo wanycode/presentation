@@ -743,24 +743,45 @@ body.is-locked {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 22px;
+    gap: 28px 34px;
 }
 
-.hero__proof li {
-    font-weight: 600;
-    font-size: 0.92rem;
-    color: var(--muted);
+/* Item stat : numéro géant + libellé éditorial. */
+.hero__proof-item {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: 3px;
+    padding-left: 18px;
+    position: relative;
 }
 
-.hero__proof li::before {
+.hero__proof-item::before {
     content: '';
-    width: 16px;
-    height: 2px;
+    position: absolute;
+    left: 0;
+    top: 0.32em;
+    width: 8px;
+    height: 8px;
     background: var(--signal);
-    flex-shrink: 0;
+    transform: rotate(45deg);
+}
+
+.hero__proof-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+}
+
+.hero__proof-label {
+    font-weight: 600;
+    font-size: 0.76rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
 }
 
 /* Rangée "coordonnées" éditoriale tout en bas du hero. */
@@ -2309,5 +2330,474 @@ de base ci-dessus), et l'actif enfonce légèrement. */
     .wire {
         bottom: -22px;
         height: 100px;
+    }
+}
+
+/* ============================================================
+   POLISH 3 — PROFONDEUR 3D, BALISE LIVE & FINITIONS PRINT
+   Respect strict de la direction artistique Print & Sport.
+   ============================================================ */
+
+/* Balise Live Studio & Horloge Paris dans la navigation */
+.nav__brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav__beacon {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    padding: 4px 11px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: rgba(245, 245, 245, 0.85);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.beacon__dot {
+    width: 6px;
+    height: 6px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: pulseDotGreen 2s infinite;
+}
+
+@keyframes pulseDotGreen {
+    0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.beacon__sep {
+    opacity: 0.4;
+}
+
+.beacon__status {
+    color: var(--signal);
+}
+
+/* Tampon interactif cliquable */
+.hero__stamp-btn {
+    position: absolute;
+    right: clamp(30px, 8vw, 130px);
+    bottom: clamp(30px, 9vh, 90px);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+    padding: 0;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero__stamp-btn:hover {
+    transform: scale(1.08) rotate(12deg);
+}
+
+.hero__stamp-btn:active {
+    transform: scale(0.92) rotate(-8deg);
+}
+
+/* Profondeur 3D et reflet Foil sur les visuels Créations */
+.work__visual {
+    perspective: 1200px;
+    transform-style: preserve-3d;
+}
+
+.monogram {
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+}
+
+.monogram__foil {
+    position: absolute;
+    inset: -100%;
+    background: radial-gradient(circle at var(--foil-x, 50%) var(--foil-y, 50%), rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.08) 28%, transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: overlay;
+    z-index: 3;
+}
+
+.work:hover .monogram__foil {
+    opacity: 1;
+}
+
+.wire {
+    transform-style: preserve-3d;
+    transform: translateZ(24px);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+
+.work:hover .wire {
+    transform: translateZ(42px) translateY(-7px);
+    box-shadow: 6px 10px 0 rgba(11, 11, 11, 0.32);
+}
+
+.wire__tag {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.65rem;
+    color: var(--paper);
+    letter-spacing: 0.08em;
+    display: inline-block;
+    padding: 4px 6px;
+    background: rgba(11, 11, 11, 0.28);
+    border-radius: 2px;
+}
+
+/* Fiche d'attributs de fabrication dans le Studio */
+.studio__craft {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+    margin-top: 24px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.76rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+}
+
+.studio__craft span:nth-child(odd) {
+    color: var(--ink);
+    background: var(--paper-2);
+    border: 1px solid var(--line-strong);
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.studio__craft span:nth-child(odd):hover {
+    border-color: var(--signal);
+    color: var(--signal);
+}
+
+/* Kinetic highlight sur le titre */
+.hero__title em {
+    transition: filter 0.25s ease;
+}
+
+.hero__title em:hover {
+    filter: drop-shadow(0 2px 8px rgba(255, 107, 0, 0.4));
+}
+
+@media (max-width: 900px) {
+    .nav__beacon {
+        display: none;
+    }
+}
+
+/* ============================================================
+   POLISH 4 — WOW ! Effets signature premium.
+   Loader presse, split text en cascade, spotlight curseur,
+   boutons magnétiques, ripple, scanline services, halos hero,
+   menu mobile en cascade. Tout est neutralisé reduced-motion.
+   ============================================================ */
+
+/* ---------- Loader d'ouverture (presse print) ----------
+   Progressive enhancement : caché par défaut, il n'apparaît que
+   quand le JS ajoute body.is-loading (donc jamais si JS échoue). */
+.loader {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    background: var(--ink);
+    place-items: center;
+    transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+    will-change: transform;
+}
+
+body.is-loading .loader,
+body.is-loaded .loader {
+    display: grid;
+}
+
+body.is-loaded .loader {
+    transform: translateY(-101%);
+}
+
+.loader__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+}
+
+.loader__mark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.8rem, 9vw, 6rem);
+    letter-spacing: -0.03em;
+    color: var(--paper);
+    animation: loaderMark 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.loader__mark::after {
+    content: '.';
+    color: var(--signal);
+}
+
+.loader__bar {
+    width: 200px;
+    height: 3px;
+    background: rgba(245, 245, 245, 0.14);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loader__bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--signal);
+    transform: translateX(-100%);
+    animation: loaderBar 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes loaderMark {
+    from { opacity: 0; transform: scale(0.88); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes loaderBar {
+    to { transform: translateX(0); }
+}
+
+/* ---------- Split text : mots qui montent en cascade ---------- */
+.js .split-ready .sw {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.4em) rotate(2deg);
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 45ms),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 45ms);
+    will-change: opacity, transform;
+}
+
+.js .split-ready.in .sw {
+    opacity: 1;
+    transform: none;
+}
+
+/* Le parent ne gère plus que la fade : les mots font le show.
+   On cible les longhands pour ne pas écraser transition-delay
+   (respiration du hero définie plus haut). */
+.js .split-ready.reveal {
+    transform: none;
+    filter: none;
+    transition-property: opacity;
+    transition-duration: 0.7s;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Spotlight lumineux qui suit le curseur ---------- */
+.cursor-glow {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 480px;
+    height: 480px;
+    z-index: 5;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.14) 0%, rgba(255, 107, 0, 0.05) 42%, transparent 70%);
+    mix-blend-mode: soft-light;
+    transform: translate(-500px, -500px);
+    will-change: transform;
+}
+
+/* ---------- Boutons magnétiques (--mx / --my posés en JS) ----------
+   Transition transform raccourcie : l'attraction suit le curseur
+   sans effet caoutchouc. */
+.btn {
+    transform: translate(var(--mx, 0), var(--my, 0));
+    transition: transform 0.08s ease-out, background 0.18s ease, color 0.18s ease,
+                border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn:hover {
+    transform: translate(var(--mx, 0), calc(var(--my, 0) - 2px));
+}
+
+.btn:active {
+    transform: translate(var(--mx, 0), var(--my, 0)) scale(0.98);
+}
+
+.work__link {
+    position: relative;
+    overflow: hidden;
+    transform: translate(var(--mx, 0), var(--my, 0));
+    transition: color 0.2s ease, background-size 0.25s ease, transform 0.08s ease-out;
+}
+
+/* ---------- Ripple au clic ---------- */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.38) 0%, rgba(255, 107, 0, 0) 70%);
+    transform: scale(0);
+    animation: rippleGrow 0.7s ease-out forwards;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes rippleGrow {
+    to { transform: scale(1); opacity: 0; }
+}
+
+/* ---------- Halos animés du hero (aurora print) ---------- */
+.hero__aura {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero__aura::before,
+.hero__aura::after {
+    content: '';
+    position: absolute;
+    width: 46vw;
+    height: 46vw;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    animation: auraFloat 16s ease-in-out infinite alternate;
+}
+
+.hero__aura::before {
+    background: radial-gradient(circle, rgba(255, 107, 0, 0.32), transparent 65%);
+    top: -18vw;
+    left: -10vw;
+}
+
+.hero__aura::after {
+    background: radial-gradient(circle, rgba(11, 11, 11, 0.18), transparent 65%);
+    bottom: -20vw;
+    right: -8vw;
+    animation-duration: 20s;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes auraFloat {
+    from { transform: translate3d(0, 0, 0) scale(1); }
+    to { transform: translate3d(6vw, 4vh, 0) scale(1.12); }
+}
+
+/* ---------- Scanline des services (suit la souris) ---------- */
+.services__list {
+    position: relative;
+}
+
+.services__list::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(var(--scan-y, -30px));
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--signal), transparent);
+    box-shadow: 0 0 16px rgba(255, 107, 0, 0.55);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity 0.2s ease;
+}
+
+.services:hover .services__list::before {
+    opacity: 0.8;
+}
+
+/* ---------- Nav compactée au scroll ---------- */
+.nav__inner {
+    transition: padding 0.3s ease;
+}
+
+.nav.is-scrolled {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    border-bottom-color: var(--signal);
+}
+
+.nav.is-scrolled .nav__inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* ---------- Ticker : pastilles qui pulsent ---------- */
+.ticker__track i {
+    animation: tickerPulse 1.8s ease-in-out infinite;
+}
+
+.ticker__track i:nth-child(2n) {
+    animation-delay: 0.6s;
+}
+
+@keyframes tickerPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.55); }
+    50% { box-shadow: 0 0 0 7px rgba(255, 107, 0, 0); }
+}
+
+/* ---------- Menu mobile : liens en cascade ---------- */
+.menu-mobile:not([hidden]) nav a {
+    animation: menuItemIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.menu-mobile:not([hidden]) nav a:nth-child(2) { animation-delay: 0.05s; }
+.menu-mobile:not([hidden]) nav a:nth-child(3) { animation-delay: 0.1s; }
+.menu-mobile:not([hidden]) nav a:nth-child(4) { animation-delay: 0.15s; }
+.menu-mobile:not([hidden]) nav a:nth-child(5) { animation-delay: 0.2s; }
+
+@keyframes menuItemIn {
+    from { opacity: 0; transform: translateY(22px); }
+}
+
+/* ---------- Stats hero : responsive ---------- */
+@media (max-width: 560px) {
+    .hero__proof-item {
+        flex-direction: row;
+        align-items: baseline;
+        gap: 10px;
+    }
+
+    .hero__proof-num {
+        font-size: 1.7rem;
+    }
+}
+
+/* ---------- Reduced motion : tout le nouveau décor est coupé ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .js .split-ready .sw {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .cursor-glow,
+    .ripple,
+    .hero__aura::before,
+    .hero__aura::after {
+        display: none;
+    }
+
+    .loader {
+        display: none !important;
+    }
+
+    .btn,
+    .btn:hover,
+    .btn:active,
+    .work__link {
+        transform: none !important;
     }
 }

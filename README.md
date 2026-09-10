@@ -1,96 +1,50 @@
-# Wany — Site Vitrine
+# Wany — Vitrine Web Sport & Indépendants
 
-Site vitrine moderne et premium pour Wany, créateur web indépendant.
+Site vitrine d'exception pour **Wany**, créateur web de 16 ans spécialisé dans les sites sur-mesure pour coachs sportifs et professionnels indépendants.
 
-## 🚀 Personnalisation
+Direction artistique : **Print & Sport** (Édition Épurée)  
+Palette de marque : Papier `#F5F5F5` · Encre `#0B0B0B` · Signal `#FF6B00`  
+Typographies : `Unbounded` (titres & display) · `Space Grotesk` (corps & technique)
 
-### Modifier les projets
+---
 
-Les projets sont situés dans la section `<section id="projects">` du fichier `index.html`. Chaque projet est structuré ainsi :
+## ✨ Points Forts & Innovations UI
 
-```html
-<div class="project-card">
-    <div class="project-image p-barbie">
-        <div class="project-monogram">CB</div>
-    </div>
-    <div class="project-content">
-        <div class="project-type">Coaching sportif &amp; nutrition</div>
-        <h3 class="project-title">Coach Barbie</h3>
-        <p class="project-description">Un site complet pour une coach sportive : présentation, programmes, nutrition sur-mesure et espace élève privé avec paiement sécurisé.</p>
-        <a href="https://wanycode.github.io/coach-barbie/" target="_blank" rel="noopener" class="project-link">Voir le site →</a>
-    </div>
-</div>
-```
+1. **Typographie Monumentale & Minimalisme Brutaliste** :
+   - Mise en page aérée inspirée des affiches éditoriales suisses et japonaises.
+   - Textes 100% authentiques, directs et sincères (sans blabla marketing ni données inventées).
 
-Pour changer le visuel d'un projet, remplacez `p-barbie` par `p-nono` ou `p-yujiro` (dégradés définis dans `styles.css`) et personnalisez le monogramme (ex. `CB`, `NC`, `YG`).
+2. **Le "Live Project Inspector" (Exclusivité)** :
+   - Un visualiseur immersif permettant de tester et manipuler en direct les 3 vrais sites de Wany sans quitter la vitrine :
+     - **Coach Barbie** : `https://wanycode.github.io/coach-barbie/`
+     - **Nono Coach Nutrition** : `https://wanycode.github.io/coach-nono/`
+     - **YujiroGrind** : `https://wanycode.github.io/yujirogrind/`
+   - Bascule instantanée entre vue **Bureau** et vue **Smartphone**.
 
-### Modifier les liens de contact
+3. **Micro-Interactions Tactiles & Performance** :
+   - Horloge synchronisée en direct (heure de Paris CET) et badge de disponibilité.
+   - Curseur signature cinétique ultra-fluide avec détection des éléments interactifs.
+   - Copie de l'adresse email en 1 clic avec confirmation toast.
+   - Zéro dépendance externe lourde (pur HTML5, CSS3 GPU et Vanilla JS).
 
-Les liens de contact sont dans la section `<section id="contact">` :
+---
 
-- **Email** : `mailto:ytop2sinj@gmail.com`
-- **Instagram** : `https://instagram.com/wn.1r3`
-
-### Modifier les informations de base
-
-Ces informations se trouvent dans le `<head>` de `index.html` :
-
-- **Titre** : `<title>Wany — Créateur Web Indépendant</title>`
-- **Description** : `<meta name="description" content="...">`
-- **URLs** : Remplacez `https://wany.fr/` par votre domaine réel (les 3 projets pointent déjà vers `wanycode.github.io`)
-
-### Couleurs et styles
-
-Les couleurs sont définies dans `styles.css` dans la section `:root` :
-
-```css
-:root {
-    --bg-primary: #0a0a0a;      /* Fond principal */
-    --bg-secondary: #111111;    /* Fond secondaire */
-    --accent: #6366f1;         /* Couleur d'accentuation */
-    --gradient: linear-gradient(...); /* Dégradé principal */
-}
-```
-
-## 📱 Optimisation Mobile
-
-Le site est déjà optimisé pour mobile avec :
-- Design responsive
-- Navigation mobile avec menu hamburger
-- Tailles de police adaptatives
-- Mises en page flexibles
-
-## 🎨 Fonctionnalités
-
-- **Animations au scroll** : Les éléments apparaissent progressivement (stagger par rangée)
-- **Effets de survol** : Micro-interactions sur les cartes (désactivées sur écrans tactiles)
-- **Glassmorphism** : Effets de verre modernes
-- **Navigation fluide** : Défilement smooth vers les sections
-- **Barre de progression** : Indicateur de scroll en haut de page
-- **Optimisé performance** : Police non-bloquante, `content-visibility`, blur réduit sur mobile
-
-## 📁 Structure du projet
+## 📁 Structure du Projet
 
 ```
 presentation/
-├── index.html          # Structure HTML principale
-├── styles.css          # Styles et animations
-├── script.js           # Interactions et animations JS
-├── favicon.svg         # Icône du site
-├── og-image.svg        # Image pour partage social
+├── index.html          # Structure HTML5 sémantique & accessible
+├── styles.css          # Feuille de styles Print & Sport épurée
+├── script.js           # Moteur interactif (horloge, inspecteur de projet, curseur)
+├── favicon.svg         # Favicon Wany (Encre, Orange Signal, repères print)
+├── og-image.svg        # Carte de partage social grand format (1200x630)
 └── README.md           # Ce fichier
 ```
 
-## 🔧 Déploiement
+---
 
-Pour publier le site :
+## 🔧 Personnalisation
 
-1. **Hébergement statique** : Netlify, Vercel, GitHub Pages
-2. **Hébergement traditionnel** : Uploader les fichiers sur votre serveur
-3. **Domaine** : Configurer votre domaine (ex: wany.fr)
-
-## 🎯 Prochaines étapes suggérées
-
-1. Ajouter de vraies captures d'écran des projets (remplacer les monogrammes)
-2. Configurer votre domaine (ex: wany.fr)
-3. Tester le site sur différents appareils
+- **Email de contact** : `ytop2sinj@gmail.com`
+- **Instagram** : `https://instagram.com/wn.1r3`
+- **Ajout de projets** : Dans `<section id="creations">` au sein d'<article class="project-item">`.

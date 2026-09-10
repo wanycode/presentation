@@ -38,6 +38,14 @@
 </head>
 <body>
 
+    <!-- Écran d'ouverture “presse print” : se retire vers le haut au chargement -->
+    <div class="loader" id="loader" aria-hidden="true">
+        <div class="loader__inner">
+            <span class="loader__mark">WANY</span>
+            <span class="loader__bar"></span>
+        </div>
+    </div>
+
     <a class="skip-link" href="#main">Aller au contenu</a>
 
     <!-- Barre de progression : indique visuellement la position de lecture -->
@@ -46,7 +54,15 @@
     <!-- ===== NAVIGATION ===== -->
     <header class="nav" id="top">
         <div class="nav__inner">
-            <a href="#top" class="nav__logo" aria-label="Wany — retour en haut">WANY<span class="nav__logo-dot">.</span></a>
+            <div class="nav__brand">
+                <a href="#top" class="nav__logo" aria-label="Wany — retour en haut">WANY<span class="nav__logo-dot">.</span></a>
+                <div class="nav__beacon" aria-label="Disponibilité et heure">
+                    <span class="beacon__dot"></span>
+                    <span id="navClock">PARIS --:--:--</span>
+                    <span class="beacon__sep">·</span>
+                    <span class="beacon__status">DISPONIBLE</span>
+                </div>
+            </div>
 
             <nav class="menu-desktop" aria-label="Navigation principale">
                 <a href="#studio">Studio</a>
@@ -90,6 +106,7 @@
 
         <!-- ===== HERO ===== -->
         <section class="hero" aria-label="Introduction">
+            <div class="hero__aura" aria-hidden="true"></div>
             <span class="crop crop--tl" aria-hidden="true"></span>
             <span class="crop crop--tr" aria-hidden="true"></span>
             <span class="crop crop--bl" aria-hidden="true"></span>
@@ -112,9 +129,18 @@
                 </div>
 
                 <ul class="hero__proof reveal">
-                    <li>3 sites coachs livrés</li>
-                    <li>100&nbsp;% sur-mesure</li>
-                    <li>modifications illimitées</li>
+                    <li class="hero__proof-item">
+                        <span class="hero__proof-num" data-count="3">3</span>
+                        <span class="hero__proof-label">sites coachs livrés</span>
+                    </li>
+                    <li class="hero__proof-item">
+                        <span class="hero__proof-num" data-count="100" data-suffix="%">100%</span>
+                        <span class="hero__proof-label">sur-mesure</span>
+                    </li>
+                    <li class="hero__proof-item">
+                        <span class="hero__proof-num">∞</span>
+                        <span class="hero__proof-label">modifications illimitées</span>
+                    </li>
                 </ul>
 
                 <div class="hero__meta reveal" aria-hidden="true">
@@ -124,17 +150,19 @@
                 </div>
             </div>
 
-            <!-- Tampon circulaire “print” qui tourne lentement -->
-            <svg class="hero__stamp reveal" viewBox="0 0 160 160" aria-hidden="true">
-                <defs>
-                    <path id="stampArc" d="M80,80 m-60,0 a60,60 0 1,1 120,0 a60,60 0 1,1 -120,0"/>
-                </defs>
-                <text class="hero__stamp-text">
-                    <textPath href="#stampArc">DESIGN &amp; CODE · WANY ·</textPath>
-                </text>
-                <circle class="hero__stamp-ico" cx="80" cy="80" r="38"/>
-                <text class="hero__stamp-mark" x="80" y="86" text-anchor="middle">W.</text>
-            </svg>
+            <!-- Tampon circulaire “print” interactif qui tourne lentement -->
+            <button class="hero__stamp-btn reveal" id="heroStamp" type="button" aria-label="Sceau Wany Studio" title="Cliquer pour authentifier le document">
+                <svg class="hero__stamp" viewBox="0 0 160 160" aria-hidden="true">
+                    <defs>
+                        <path id="stampArc" d="M80,80 m-60,0 a60,60 0 1,1 120,0 a60,60 0 1,1 -120,0"/>
+                    </defs>
+                    <text class="hero__stamp-text">
+                        <textPath href="#stampArc">DESIGN &amp; CODE · WANY ·</textPath>
+                    </text>
+                    <circle class="hero__stamp-ico" cx="80" cy="80" r="38"/>
+                    <text class="hero__stamp-mark" x="80" y="86" text-anchor="middle">W.</text>
+                </svg>
+            </button>
         </section>
 
         <!-- ===== TICKER ===== -->
@@ -163,6 +191,15 @@
                         <p class="reveal"><strong>Rapide &amp; fluide</strong><span>— même sur mobile, zéro temps de chargement inutile.</span></p>
                         <p class="reveal"><strong>Pensé pour convertir</strong><span>— un design qui rassure, motive et donne envie d'agir.</span></p>
                         <p class="reveal"><strong>À ton image</strong><span>— je construis le site pour toi, pas depuis un modèle.</span></p>
+                    </div>
+                    <div class="studio__craft reveal">
+                        <span>100% CODE SUR-MESURE</span>
+                        <span>·</span>
+                        <span>VITESSE ÉCLAIR</span>
+                        <span>·</span>
+                        <span>ZÉRO TEMPLATE</span>
+                        <span>·</span>
+                        <span>MODIFICATIONS ILLIMITÉES</span>
                     </div>
                 </div>
             </div>
@@ -222,8 +259,12 @@
                         <span class="monogram__bar"><i></i><i></i><i></i></span>
                         <span class="monogram__letters">CB</span>
                         <span class="monogram__words">coach-barbie.fr</span>
+                        <div class="monogram__foil" aria-hidden="true"></div>
                     </div>
-                    <div class="wire reveal"><div class="wire__card wire__card--a"></div><div class="wire__card wire__card--b"></div></div>
+                    <div class="wire reveal">
+                        <div class="wire__card wire__card--a"><span class="wire__tag">MACROS</span></div>
+                        <div class="wire__card wire__card--b"><span class="wire__tag">CLIENTS</span></div>
+                    </div>
                 </div>
                 <div class="work__content reveal">
                     <span class="work__index">001</span>
@@ -240,8 +281,12 @@
                         <span class="monogram__bar"><i></i><i></i><i></i></span>
                         <span class="monogram__letters">NC</span>
                         <span class="monogram__words">nono-coach.fr</span>
+                        <div class="monogram__foil" aria-hidden="true"></div>
                     </div>
-                    <div class="wire reveal"><div class="wire__card wire__card--a"></div><div class="wire__card wire__card--b"></div></div>
+                    <div class="wire reveal">
+                        <div class="wire__card wire__card--a"><span class="wire__tag">BILAN</span></div>
+                        <div class="wire__card wire__card--b"><span class="wire__tag">SUIVI</span></div>
+                    </div>
                 </div>
                 <div class="work__content reveal">
                     <span class="work__index">002</span>
@@ -258,8 +303,12 @@
                         <span class="monogram__bar"><i></i><i></i><i></i></span>
                         <span class="monogram__letters">YG</span>
                         <span class="monogram__words">yujirogrind.app</span>
+                        <div class="monogram__foil" aria-hidden="true"></div>
                     </div>
-                    <div class="wire reveal"><div class="wire__card wire__card--a"></div><div class="wire__card wire__card--b"></div></div>
+                    <div class="wire reveal">
+                        <div class="wire__card wire__card--a"><span class="wire__tag">1RM</span></div>
+                        <div class="wire__card wire__card--b"><span class="wire__tag">FORCE</span></div>
+                    </div>
                 </div>
                 <div class="work__content reveal">
                     <span class="work__index">003</span>
