@@ -1,12 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-  <rect width="120" height="120" rx="14" fill="#0B0B0B"/>
-  <!-- Repères d'angle print -->
-  <path d="M12 24 L12 12 L24 12" fill="none" stroke="#FF6B00" stroke-width="3"/>
-  <path d="M108 24 L108 12 L96 12" fill="none" stroke="#FF6B00" stroke-width="3"/>
-  <path d="M12 96 L12 108 L24 108" fill="none" stroke="#FF6B00" stroke-width="3"/>
-  <path d="M108 96 L108 108 L96 108" fill="none" stroke="#FF6B00" stroke-width="3"/>
-  <!-- Lettre W géométrique stylisée -->
-  <path d="M30 38 L44 82 L60 48 L76 82 L90 38" fill="none" stroke="#F5F5F5" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter"/>
-  <!-- Pastille Signal -->
-  <circle cx="95" cy="80" r="6" fill="#FF6B00"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+    <rect width="64" height="64" rx="14" fill="#0A0A0A"/>
+    <path d="M32 7 L42 17 L32 27 L22 17 Z" fill="#FF5A1F"/>
+    <text x="32" y="49" text-anchor="middle"
+          font-family="Unbounded, 'Space Grotesk', Helvetica, Arial, sans-serif"
+          font-size="30" font-weight="800" letter-spacing="-1" fill="#F4F2ED">W.</text>
 </svg>

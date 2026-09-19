@@ -3,66 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wany — Créateur web de 16 ans, sites pour coachs sportifs</title>
-    <meta name="description" content="Wany, créateur web de 16 ans. Des sites modernes, rapides et sur-mesure pour les coachs sportifs et les pros. Vitrines, landing pages, apps de coaching. Modifications illimitées.">
-    <meta name="theme-color" content="#F5F5F5">
+    <title>Wany — Créateur web pour coachs sportifs &amp; indépendants</title>
+    <meta name="description" content="Wany, créateur web. Plus de 10 projets livrés : des sites modernes, rapides et sur-mesure pour les coachs sportifs et les indépendants.">
+    <meta name="theme-color" content="#0A0A0A">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://wany.fr/">
-    <meta property="og:title" content="Wany — Créateur web de 16 ans">
-    <meta property="og:description" content="Je transforme des idées en sites qui donnent envie de cliquer. Sur-mesure pour les coachs sportifs et les professionnels.">
+    <meta property="og:title" content="Wany — Créateur web">
+    <meta property="og:description" content="Plus de 10 projets livrés. Des sites qui transforment les visiteurs en clients.">
     <meta property="og:image" content="https://wany.fr/og-image.svg">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://wany.fr/">
-    <meta property="twitter:title" content="Wany — Créateur web de 16 ans">
-    <meta property="twitter:description" content="Je transforme des idées en sites qui donnent envie de cliquer. Sur-mesure pour les coachs sportifs et les professionnels.">
-    <meta property="twitter:image" content="https://wany.fr/og-image.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://wany.fr/">
+    <meta name="twitter:title" content="Wany — Créateur web">
+    <meta name="twitter:description" content="Plus de 10 projets livrés. Des sites qui transforment les visiteurs en clients.">
+    <meta name="twitter:image" content="https://wany.fr/og-image.svg">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     </noscript>
 
     <link rel="preload" as="style" href="styles.css">
     <link rel="stylesheet" href="styles.css" fetchpriority="high">
-    <!-- Marqueur synchrone : la présence de JS permet les effects reveal.
-         Sans .js, tout le contenu reste visible (progressive enhancement). -->
     <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-    <!-- Écran d'ouverture “presse print” : se retire vers le haut au chargement -->
-    <div class="loader" id="loader" aria-hidden="true">
-        <div class="loader__inner">
-            <span class="loader__mark">WANY</span>
-            <span class="loader__bar"></span>
-        </div>
-    </div>
-
     <a class="skip-link" href="#main">Aller au contenu</a>
 
-    <!-- Barre de progression : indique visuellement la position de lecture -->
     <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-    <!-- ===== NAVIGATION ===== -->
+    <!-- ===== NAVIGATION FLOTTANTE ===== -->
     <header class="nav" id="top">
-        <div class="nav__inner">
-            <div class="nav__brand">
-                <a href="#top" class="nav__logo" aria-label="Wany — retour en haut">WANY<span class="nav__logo-dot">.</span></a>
-                <div class="nav__beacon" aria-label="Disponibilité et heure">
-                    <span class="beacon__dot"></span>
-                    <span id="navClock">PARIS --:--:--</span>
-                    <span class="beacon__sep">·</span>
-                    <span class="beacon__status">DISPONIBLE</span>
-                </div>
-            </div>
+        <div class="nav__bar">
+            <a href="#top" class="nav__logo" aria-label="Wany — retour en haut">WANY<span class="nav__logo-dot">.</span></a>
 
             <nav class="menu-desktop" aria-label="Navigation principale">
                 <a href="#studio">Studio</a>
@@ -71,11 +52,13 @@
                 <a href="#process">Processus</a>
             </nav>
 
-            <a href="#contact" class="btn btn--signal nav__cta">Discutons</a>
-
-            <button class="nav__toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile">
-                <span></span><span></span>
-            </button>
+            <div class="nav__aside">
+                <span class="nav__beacon"><span class="beacon__dot" aria-hidden="true"></span>Dispo</span>
+                <a href="#contact" class="btn btn--signal nav__cta">Discutons<span class="arrow" aria-hidden="true">→</span></a>
+                <button class="nav__toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile">
+                    <span></span><span></span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -88,14 +71,12 @@
             <a href="#process"><span>04</span> Processus</a>
             <a href="#contact"><span>05</span> Contact</a>
         </nav>
-        <p class="menu-mobile__mail">
-            <a href="mailto:ytop2sinj@gmail.com">ytop2sinj@gmail.com</a>
-        </p>
+        <a class="menu-mobile__mail" href="mailto:ytop2sinj@gmail.com">ytop2sinj@gmail.com</a>
     </div>
 
     <main id="main">
 
-        <!-- Rail index éditorial (sections numérotées) -->
+        <!-- Rail index éditorial -->
         <nav class="side-index" aria-label="Index des sections">
             <a href="#studio">01</a>
             <a href="#services">02</a>
@@ -106,32 +87,32 @@
 
         <!-- ===== HERO ===== -->
         <section class="hero" aria-label="Introduction">
-            <div class="hero__aura" aria-hidden="true"></div>
-            <span class="crop crop--tl" aria-hidden="true"></span>
-            <span class="crop crop--tr" aria-hidden="true"></span>
-            <span class="crop crop--bl" aria-hidden="true"></span>
-            <span class="crop crop--br" aria-hidden="true"></span>
+            <div class="hero__glow" aria-hidden="true"></div>
+            <div class="hero__word" aria-hidden="true">WANY</div>
 
             <div class="container hero__inner">
-                <p class="hero__kicker reveal">Créateur web de 16 ans — spécialiste coachs sportifs &amp; indépendants</p>
+                <p class="hero__kicker reveal">
+                    <span class="hero__kicker-dot" aria-hidden="true"></span>
+                    Créateur web · disponible pour de nouveaux projets
+                </p>
 
                 <h1 class="hero__title reveal">
-                    Des sites qui donnent <em>envie de cliquer</em>.
+                    Des visiteurs.<br>Puis des <em>clients</em>.
                 </h1>
 
                 <p class="hero__lead reveal">
-                    Je suis Wany. Je conçois des sites modernes, rapides et entièrement sur-mesure pour que ton activité ait enfin une présence en ligne à sa hauteur.
+                    Moi c'est Wany. Je conçois des sites modernes et rapides pour les coachs sportifs et les indépendants&nbsp;— pensés pour convertir, pas seulement pour être jolis.
                 </p>
 
                 <div class="hero__actions reveal">
                     <a href="#creations" class="btn btn--signal btn--lg">Voir les créations<span class="arrow" aria-hidden="true">→</span></a>
-                    <a href="#contact" class="btn btn--ghost btn--lg">Discutons de ton projet</a>
+                    <a href="#contact" class="btn btn--glass btn--lg">Discutons de ton projet</a>
                 </div>
 
                 <ul class="hero__proof reveal">
                     <li class="hero__proof-item">
-                        <span class="hero__proof-num" data-count="3">3</span>
-                        <span class="hero__proof-label">sites coachs livrés</span>
+                        <span class="hero__proof-num" data-count="10" data-suffix="+">10+</span>
+                        <span class="hero__proof-label">projets livrés</span>
                     </li>
                     <li class="hero__proof-item">
                         <span class="hero__proof-num" data-count="100" data-suffix="%">100%</span>
@@ -139,19 +120,12 @@
                     </li>
                     <li class="hero__proof-item">
                         <span class="hero__proof-num">∞</span>
-                        <span class="hero__proof-label">modifications illimitées</span>
+                        <span class="hero__proof-label">modifications</span>
                     </li>
                 </ul>
-
-                <div class="hero__meta reveal" aria-hidden="true">
-                    <span>WANY© — DESIGN &amp; CODE</span>
-                    <span class="hero__meta-rule"></span>
-                    <span>SCROLL&nbsp;↓</span>
-                </div>
             </div>
 
-            <!-- Tampon circulaire “print” interactif qui tourne lentement -->
-            <button class="hero__stamp-btn reveal" id="heroStamp" type="button" aria-label="Sceau Wany Studio" title="Cliquer pour authentifier le document">
+            <button class="hero__stamp-btn reveal" id="heroStamp" type="button" aria-label="Sceau Wany Studio">
                 <svg class="hero__stamp" viewBox="0 0 160 160" aria-hidden="true">
                     <defs>
                         <path id="stampArc" d="M80,80 m-60,0 a60,60 0 1,1 120,0 a60,60 0 1,1 -120,0"/>
@@ -168,38 +142,41 @@
         <!-- ===== TICKER ===== -->
         <div class="ticker" aria-hidden="true">
             <div class="ticker__track">
-                <span>Coachs sportifs<i></i>Nutrition<i></i>Landing pages<i></i>Sites vitrines<i></i>Barbiers<i></i>Indépendants<i></i></span>
-                <span>Coachs sportifs<i></i>Nutrition<i></i>Landing pages<i></i>Sites vitrines<i></i>Barbiers<i></i>Indépendants<i></i></span>
+                <span>Coachs sportifs</span><i>◆</i>
+                <span>Landing pages</span><i>◆</i>
+                <span>Sites vitrines</span><i>◆</i>
+                <span>Coaching en ligne</span><i>◆</i>
+                <span>Indépendants</span><i>◆</i>
+                <span>Nutrition &amp; remise en forme</span><i>◆</i>
+                <span>Coachs sportifs</span><i>◆</i>
+                <span>Landing pages</span><i>◆</i>
+                <span>Sites vitrines</span><i>◆</i>
+                <span>Coaching en ligne</span><i>◆</i>
+                <span>Indépendants</span><i>◆</i>
+                <span>Nutrition &amp; remise en forme</span><i>◆</i>
             </div>
         </div>
 
         <!-- ===== STUDIO / À PROPOS ===== -->
         <section id="studio" class="studio section" aria-labelledby="studio-title" data-num="01">
             <div class="container studio__grid">
-                <p class="studio__label reveal"><span>01</span> — Studio</p>
+                <p class="section-head reveal"><span>01</span> Studio</p>
                 <div class="studio__body">
                     <h2 class="h-display reveal" id="studio-title">Le web,<br>un projet à la fois.</h2>
+
                     <div class="studio__cols">
                         <p class="reveal">
-                            Je suis un jeune développeur passionné par le web et la technologie. À 16&nbsp;ans, mon objectif est simple&nbsp;: créer des sites qui ne ressemblent pas aux autres.
+                            Développeur passionné par le web, je crée des sites qui ne ressemblent pas aux autres. <strong>Plus de 10 projets livrés</strong> depuis mes débuts&nbsp;: coachs sportifs, indépendants, petites marques.
                         </p>
                         <p class="reveal">
-                            Je me spécialise dans les sites pour coachs sportifs et professionnels. Mon but n'est pas de faire juste une page, mais une vraie présence qui attire des clients.
+                            Je me spécialise dans les sites pour coachs sportifs et indépendants. Pas juste une page&nbsp;: une présence qui attire des clients et qui te ressemble vraiment.
                         </p>
                     </div>
+
                     <div class="studio__principes">
-                        <p class="reveal"><strong>Rapide &amp; fluide</strong><span>— même sur mobile, zéro temps de chargement inutile.</span></p>
-                        <p class="reveal"><strong>Pensé pour convertir</strong><span>— un design qui rassure, motive et donne envie d'agir.</span></p>
-                        <p class="reveal"><strong>À ton image</strong><span>— je construis le site pour toi, pas depuis un modèle.</span></p>
-                    </div>
-                    <div class="studio__craft reveal">
-                        <span>100% CODE SUR-MESURE</span>
-                        <span>·</span>
-                        <span>VITESSE ÉCLAIR</span>
-                        <span>·</span>
-                        <span>ZÉRO TEMPLATE</span>
-                        <span>·</span>
-                        <span>MODIFICATIONS ILLIMITÉES</span>
+                        <p class="reveal"><strong>Rapide &amp; fluide</strong><span>même sur mobile, zéro temps de chargement inutile.</span></p>
+                        <p class="reveal"><strong>Pensé pour convertir</strong><span>un design qui rassure, motive et donne envie d'agir.</span></p>
+                        <p class="reveal"><strong>À ton image</strong><span>je construis le site pour toi, pas depuis un modèle.</span></p>
                     </div>
                 </div>
             </div>
@@ -208,8 +185,8 @@
         <!-- ===== SERVICES ===== -->
         <section id="services" class="services section" aria-labelledby="services-title" data-num="02">
             <div class="container">
-                <p class="section-head reveal"><span>02</span> — Ce que je crée</p>
-                <h2 class="h-display reveal" id="services-title">Six façons<br>de te faire voir.</h2>
+                <p class="section-head reveal"><span>02</span> Ce que je crée</p>
+                <h2 class="h-display reveal" id="services-title">Quatre façons<br>de te faire voir.</h2>
 
                 <ul class="services__list">
                     <li class="service reveal">
@@ -229,101 +206,100 @@
                     </li>
                     <li class="service reveal">
                         <span class="service__num">04</span>
-                        <h3 class="service__name">Barbiers &amp; coiffeurs</h3>
-                        <p class="service__desc">Réservation en ligne et galerie de réalisations.</p>
-                    </li>
-                    <li class="service reveal">
-                        <span class="service__num">05</span>
                         <h3 class="service__name">Indépendants &amp; freelances</h3>
                         <p class="service__desc">Une présence en ligne adaptée à ton activité et à ta façon de travailler.</p>
-                    </li>
-                    <li class="service reveal">
-                        <span class="service__num">06</span>
-                        <h3 class="service__name">Pages de présentation</h3>
-                        <p class="service__desc">Dossiers de présentation digitaux pour tes projets.</p>
                     </li>
                 </ul>
             </div>
         </section>
 
+        <!-- ===== CONFIANCE ===== -->
+        <section class="trust" aria-label="Preuves">
+            <div class="container trust__inner">
+                <p class="trust__big reveal"><span class="trust__num" data-count="10" data-suffix="+">10+</span> projets livrés</p>
+                <p class="trust__text reveal">Coachs, indépendants, petites marques&nbsp;: chacun est reparti avec un site sur-mesure, en ligne et prêt à convertir.</p>
+            </div>
+        </section>
+
         <!-- ===== CRÉATIONS ===== -->
         <section id="creations" class="creations section" aria-labelledby="creations-title" data-num="03">
-            <div class="container">
-                <p class="section-head reveal"><span>03</span> — Créations</p>
-                <h2 class="h-display reveal" id="creations-title">Trois projets,<br>trois personnalités.</h2>
+            <div class="container creations__head">
+                <p class="section-head reveal"><span>03</span> Créations</p>
+                <div class="creations__head-row">
+                    <h2 class="h-display reveal" id="creations-title">Trois projets,<br>trois personnalités.</h2>
+                    <p class="creations__head-note reveal">Un aperçu live&nbsp;: clique sur une fenêtre pour ouvrir le site.</p>
+                </div>
             </div>
 
-            <article class="work">
-                <div class="work__visual work--barbie reveal">
-                    <div class="monogram">
-                        <span class="monogram__bar"><i></i><i></i><i></i></span>
-                        <span class="monogram__letters">CB</span>
-                        <span class="monogram__words">coach-barbie.fr</span>
-                        <div class="monogram__foil" aria-hidden="true"></div>
-                    </div>
-                    <div class="wire reveal">
-                        <div class="wire__card wire__card--a"><span class="wire__tag">MACROS</span></div>
-                        <div class="wire__card wire__card--b"><span class="wire__tag">CLIENTS</span></div>
-                    </div>
-                </div>
-                <div class="work__content reveal">
+            <article class="work work--malo reveal">
+                <a class="work__frame" href="https://wanycode.github.io/malomlv/" target="_blank" rel="noopener" aria-label="Voir le site Malo MLV (nouvelle fenêtre)">
+                    <span class="frame__bar">
+                        <span class="frame__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="frame__url">wanycode.github.io/malomlv</span>
+                        <span class="frame__open" aria-hidden="true">↗</span>
+                    </span>
+                    <span class="frame__screen">
+                        <iframe src="https://wanycode.github.io/malomlv/" loading="lazy" title="Aperçu du site Malo MLV" tabindex="-1"></iframe>
+                    </span>
+                </a>
+                <div class="work__content">
                     <span class="work__index">001</span>
                     <p class="work__tag">Coaching sportif &amp; nutrition</p>
-                    <h3 class="h3">Coach Barbie</h3>
-                    <p class="work__desc">Un site complet pour une coach sportive&nbsp;: présentation, programmes, nutrition sur-mesure et espace élève privé avec paiement sécurisé.</p>
-                    <a href="https://wanycode.github.io/coach-barbie/" target="_blank" rel="noopener" class="work__link">Voir le projet<span aria-hidden="true">→</span></a>
+                    <h3 class="h3">Malo MLV</h3>
+                    <p class="work__desc">Coaching en ligne, prise de muscle et sèche. Bilan personnalisé, programme et nutrition construits sur mesure, suivi semaine après semaine.</p>
+                    <a href="https://wanycode.github.io/malomlv/" target="_blank" rel="noopener" class="work__link">Voir le projet<span aria-hidden="true" class="work__link-ico">→</span></a>
                 </div>
             </article>
 
-            <article class="work work--rev">
-                <div class="work__visual work--nono reveal">
-                    <div class="monogram">
-                        <span class="monogram__bar"><i></i><i></i><i></i></span>
-                        <span class="monogram__letters">NC</span>
-                        <span class="monogram__words">nono-coach.fr</span>
-                        <div class="monogram__foil" aria-hidden="true"></div>
-                    </div>
-                    <div class="wire reveal">
-                        <div class="wire__card wire__card--a"><span class="wire__tag">BILAN</span></div>
-                        <div class="wire__card wire__card--b"><span class="wire__tag">SUIVI</span></div>
-                    </div>
-                </div>
-                <div class="work__content reveal">
+            <article class="work work--rev work--atlas reveal">
+                <a class="work__frame" href="https://wanycode.github.io/coaching-ld/" target="_blank" rel="noopener" aria-label="Voir le site Atlas (nouvelle fenêtre)">
+                    <span class="frame__bar">
+                        <span class="frame__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="frame__url">wanycode.github.io/coaching-ld</span>
+                        <span class="frame__open" aria-hidden="true">↗</span>
+                    </span>
+                    <span class="frame__screen">
+                        <iframe src="https://wanycode.github.io/coaching-ld/" loading="lazy" title="Aperçu du site Atlas" tabindex="-1"></iframe>
+                    </span>
+                </a>
+                <div class="work__content">
                     <span class="work__index">002</span>
-                    <p class="work__tag">Coach nutrition</p>
-                    <h3 class="h3">Nono Coach Nutrition</h3>
-                    <p class="work__desc">Un site clair et motivant&nbsp;: accompagnement pas à pas, formules, tarifs et questions fréquentes.</p>
-                    <a href="https://wanycode.github.io/coach-nono/" target="_blank" rel="noopener" class="work__link">Voir le projet<span aria-hidden="true">→</span></a>
+                    <p class="work__tag">Protocole entrepreneurs</p>
+                    <h3 class="h3">Atlas</h3>
+                    <p class="work__desc">Un protocole individuel de six mois pour les entrepreneurs et indépendants, avec comparateur avant&nbsp;/&nbsp;après des transformations.</p>
+                    <a href="https://wanycode.github.io/coaching-ld/" target="_blank" rel="noopener" class="work__link">Voir le projet<span aria-hidden="true" class="work__link-ico">→</span></a>
                 </div>
             </article>
 
-            <article class="work">
-                <div class="work__visual work--yujiro reveal">
-                    <div class="monogram">
-                        <span class="monogram__bar"><i></i><i></i><i></i></span>
-                        <span class="monogram__letters">YG</span>
-                        <span class="monogram__words">yujirogrind.app</span>
-                        <div class="monogram__foil" aria-hidden="true"></div>
-                    </div>
-                    <div class="wire reveal">
-                        <div class="wire__card wire__card--a"><span class="wire__tag">1RM</span></div>
-                        <div class="wire__card wire__card--b"><span class="wire__tag">FORCE</span></div>
-                    </div>
-                </div>
-                <div class="work__content reveal">
+            <article class="work work--papafit reveal">
+                <a class="work__frame" href="https://wanycode.github.io/papafit/" target="_blank" rel="noopener" aria-label="Voir le site Papafit 4.0 (nouvelle fenêtre)">
+                    <span class="frame__bar">
+                        <span class="frame__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span class="frame__url">wanycode.github.io/papafit</span>
+                        <span class="frame__open" aria-hidden="true">↗</span>
+                    </span>
+                    <span class="frame__screen">
+                        <iframe src="https://wanycode.github.io/papafit/" loading="lazy" title="Aperçu du site Papafit 4.0" tabindex="-1"></iframe>
+                    </span>
+                </a>
+                <div class="work__content">
                     <span class="work__index">003</span>
-                    <p class="work__tag">App de coaching premium</p>
-                    <h3 class="h3">YujiroGrind</h3>
-                    <p class="work__desc">Une plateforme de gestion pour coachs&nbsp;: clients, séances, volume de charge et suivi de progression.</p>
-                    <a href="https://wanycode.github.io/yujirogrind/" target="_blank" rel="noopener" class="work__link">Voir le projet<span aria-hidden="true">→</span></a>
+                    <p class="work__tag">Remise en forme 35 ans +</p>
+                    <h3 class="h3">Papafit 4.0</h3>
+                    <p class="work__desc">Site vitrine pour Kevin Domingo&nbsp;: remise en forme non agressive, séances individuelles et programmes sur mesure.</p>
+                    <a href="https://wanycode.github.io/papafit/" target="_blank" rel="noopener" class="work__link">Voir le projet<span aria-hidden="true" class="work__link-ico">→</span></a>
                 </div>
             </article>
+
+            <p class="creations__more reveal">
+                Et&nbsp;7 autres projets livrés&nbsp;— coachs, indépendants et petites marques.
+            </p>
         </section>
 
         <!-- ===== PROCESSUS ===== -->
         <section id="process" class="process section" aria-labelledby="process-title" data-num="04">
             <div class="container">
-                <p class="section-head reveal"><span>04</span> — Processus</p>
+                <p class="section-head reveal"><span>04</span> Processus</p>
                 <h2 class="h-display reveal" id="process-title">De l'idée<br>au site clé en main.</h2>
 
                 <ol class="process__list">
@@ -355,11 +331,8 @@
         <!-- ===== CONTACT ===== -->
         <section id="contact" class="contact section" aria-labelledby="contact-title" data-num="05">
             <div class="container">
-                <p class="section-head section-head--light reveal"><span>05</span> — Contact</p>
+                <p class="section-head section-head--light reveal"><span>05</span> Contact</p>
                 <h2 class="h-display h-display--light reveal" id="contact-title">Ton prochain site<br>commence ici.</h2>
-                <p class="contact__lead reveal">
-                    Une idée, un projet, ou juste envie de discuter&nbsp;? Écris-moi. Je réponds généralement en moins de 24&nbsp;heures.
-                </p>
                 <a class="contact__email reveal" href="mailto:ytop2sinj@gmail.com">ytop2sinj@gmail.com<span aria-hidden="true">→</span></a>
                 <div class="contact__actions reveal">
                     <a href="mailto:ytop2sinj@gmail.com" class="btn btn--ink btn--lg">Commencer mon projet<span aria-hidden="true">→</span></a>
@@ -373,21 +346,25 @@
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
         <div class="container footer__inner">
-            <a href="#top" class="nav__logo footer__logo">WANY<span class="nav__logo-dot">.</span></a>
-            <nav class="footer__nav" aria-label="Navigation de pied de page">
+            <div class="footer__top">
+                <a href="#top" class="nav__logo footer__logo">WANY<span class="nav__logo-dot">.</span></a>
+                <p class="footer__claim">Des sites qui transforment les visiteurs en clients. Simple, rapide, efficace.</p>
+            </div>
+
+            <nav class="footer__nav">
                 <a href="#studio">Studio</a>
                 <a href="#services">Services</a>
                 <a href="#creations">Créations</a>
                 <a href="#process">Processus</a>
+                <a href="#contact">Contact</a>
             </nav>
+
             <div class="footer__meta">
-                <p>© 2026 Wany — conçu &amp; fabriqué main.</p>
-                <a href="#top">Revenir en haut ↑</a>
+                <span>© 2026 Wany. Tous droits réservés.</span>
+                <span>Design &amp; code avec passion.</span>
             </div>
         </div>
     </footer>
-
-    <button class="back-to-top" id="backToTop" aria-label="Revenir en haut" title="Revenir en haut">↑</button>
 
     <script src="script.js"></script>
 </body>
