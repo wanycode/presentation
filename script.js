@@ -97,7 +97,13 @@ if (toggleBtn && menuMobile) {
     const sections = [...document.querySelectorAll('section[id]')];
     if (!links.length || !sections.length) return;
 
+    const hrefs = new Set([...links].map(a => a.getAttribute('href')));
+
     const setActive = (id) => {
+        /* Les sections sans entrée de navigation (prestations, maintenance…)
+           ne doivent pas éteindre le repère courant. */
+        if (!hrefs.has(`#${id}`)) return;
+
         links.forEach((a) => {
             if (a.getAttribute('href') === `#${id}`) a.setAttribute('aria-current', 'true');
             else a.removeAttribute('aria-current');

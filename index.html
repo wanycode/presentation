@@ -3,23 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wany — Créateur web pour coachs sportifs &amp; indépendants</title>
-    <meta name="description" content="Wany, créateur web. Plus de 10 projets livrés : des sites modernes, rapides et sur-mesure pour les coachs sportifs et les indépendants.">
+    <title>WANY — Sites web pour coachs sportifs · à partir de 29,99 €</title>
+    <meta name="description" content="Sites modernes, rapides et personnalisés pour les coachs sportifs. Formules claires à partir de 29,99 €, hébergement inclus.">
     <meta name="theme-color" content="#0A0A0A">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://wany.fr/">
-    <meta property="og:title" content="Wany — Créateur web">
-    <meta property="og:description" content="Plus de 10 projets livrés. Des sites qui transforment les visiteurs en clients.">
-    <meta property="og:image" content="https://wany.fr/og-image.svg">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://wany.fr/">
-    <meta name="twitter:title" content="Wany — Créateur web">
-    <meta name="twitter:description" content="Plus de 10 projets livrés. Des sites qui transforment les visiteurs en clients.">
-    <meta name="twitter:image" content="https://wany.fr/og-image.svg">
 
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
@@ -47,14 +33,15 @@
 
             <nav class="menu-desktop" aria-label="Navigation principale">
                 <a href="#studio">Studio</a>
-                <a href="#services">Services</a>
+                <a href="#offres">Offres</a>
                 <a href="#creations">Créations</a>
                 <a href="#process">Processus</a>
+                <a href="#contact">Contact</a>
             </nav>
 
             <div class="nav__aside">
                 <span class="nav__beacon"><span class="beacon__dot" aria-hidden="true"></span>Dispo</span>
-                <a href="#contact" class="btn btn--signal nav__cta">Discutons<span class="arrow" aria-hidden="true">→</span></a>
+                <a href="#offres" class="btn btn--signal nav__cta">Voir les offres<span class="arrow" aria-hidden="true">→</span></a>
                 <button class="nav__toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu-mobile">
                     <span></span><span></span>
                 </button>
@@ -66,23 +53,26 @@
     <div class="menu-mobile" id="menu-mobile" hidden>
         <nav aria-label="Navigation mobile">
             <a href="#studio"><span>01</span> Studio</a>
-            <a href="#services"><span>02</span> Services</a>
+            <a href="#offres"><span>02</span> Offres</a>
             <a href="#creations"><span>03</span> Créations</a>
             <a href="#process"><span>04</span> Processus</a>
             <a href="#contact"><span>05</span> Contact</a>
         </nav>
-        <a class="menu-mobile__mail" href="mailto:ytop2sinj@gmail.com">ytop2sinj@gmail.com</a>
+        <div class="menu-mobile__foot">
+            <a href="mailto:ytop2sinj@gmail.com" class="menu-mobile__mail">ytop2sinj@gmail.com</a>
+            <a href="#offres" class="btn btn--signal">Voir les offres<span class="arrow" aria-hidden="true">→</span></a>
+        </div>
     </div>
 
     <main id="main">
 
         <!-- Rail index éditorial -->
         <nav class="side-index" aria-label="Index des sections">
-            <a href="#studio">01</a>
-            <a href="#services">02</a>
-            <a href="#creations">03</a>
-            <a href="#process">04</a>
-            <a href="#contact">05</a>
+            <a href="#studio" aria-label="Studio">01</a>
+            <a href="#offres" aria-label="Offres">02</a>
+            <a href="#creations" aria-label="Créations">03</a>
+            <a href="#process" aria-label="Processus">04</a>
+            <a href="#contact" aria-label="Contact">05</a>
         </nav>
 
         <!-- ===== HERO ===== -->
@@ -93,36 +83,26 @@
             <div class="container hero__inner">
                 <p class="hero__kicker reveal">
                     <span class="hero__kicker-dot" aria-hidden="true"></span>
-                    Créateur web · disponible pour de nouveaux projets
+                    Websites pour coachs sportifs · Disponible
                 </p>
 
                 <h1 class="hero__title reveal">
-                    Des visiteurs.<br>Puis des <em>clients</em>.
+                    Ton coaching mérite<br>un <em>vrai site</em>.
                 </h1>
 
                 <p class="hero__lead reveal">
-                    Moi c'est Wany. Je conçois des sites modernes et rapides pour les coachs sportifs et les indépendants&nbsp;— pensés pour convertir, pas seulement pour être jolis.
+                    Des sites modernes, rapides et personnalisés pour présenter ton activité, tes offres et convertir tes visiteurs en clients.
                 </p>
 
                 <div class="hero__actions reveal">
-                    <a href="#creations" class="btn btn--signal btn--lg">Voir les créations<span class="arrow" aria-hidden="true">→</span></a>
-                    <a href="#contact" class="btn btn--glass btn--lg">Discutons de ton projet</a>
+                    <a href="#offres" class="btn btn--signal btn--lg">Voir les offres<span class="arrow" aria-hidden="true">→</span></a>
+                    <a href="#creations" class="btn btn--glass btn--lg">Voir les créations</a>
                 </div>
 
-                <ul class="hero__proof reveal">
-                    <li class="hero__proof-item">
-                        <span class="hero__proof-num" data-count="10" data-suffix="+">10+</span>
-                        <span class="hero__proof-label">projets livrés</span>
-                    </li>
-                    <li class="hero__proof-item">
-                        <span class="hero__proof-num" data-count="100" data-suffix="%">100%</span>
-                        <span class="hero__proof-label">sur-mesure</span>
-                    </li>
-                    <li class="hero__proof-item">
-                        <span class="hero__proof-num">∞</span>
-                        <span class="hero__proof-label">modifications</span>
-                    </li>
-                </ul>
+                <p class="hero__note reveal">
+                    <span class="hero__note-ico" aria-hidden="true">◆</span>
+                    À partir de 29,99 € · Hébergement gratuit inclus
+                </p>
             </div>
 
             <button class="hero__stamp-btn reveal" id="heroStamp" type="button" aria-label="Sceau Wany Studio">
@@ -146,78 +126,183 @@
                 <span>Landing pages</span><i>◆</i>
                 <span>Sites vitrines</span><i>◆</i>
                 <span>Coaching en ligne</span><i>◆</i>
+                <span>Programmes &amp; offres</span><i>◆</i>
                 <span>Indépendants</span><i>◆</i>
-                <span>Nutrition &amp; remise en forme</span><i>◆</i>
                 <span>Coachs sportifs</span><i>◆</i>
                 <span>Landing pages</span><i>◆</i>
                 <span>Sites vitrines</span><i>◆</i>
                 <span>Coaching en ligne</span><i>◆</i>
+                <span>Programmes &amp; offres</span><i>◆</i>
                 <span>Indépendants</span><i>◆</i>
-                <span>Nutrition &amp; remise en forme</span><i>◆</i>
             </div>
         </div>
 
-        <!-- ===== STUDIO / À PROPOS ===== -->
-        <section id="studio" class="studio section" aria-labelledby="studio-title" data-num="01">
-            <div class="container studio__grid">
-                <p class="section-head reveal"><span>01</span> Studio</p>
-                <div class="studio__body">
-                    <h2 class="h-display reveal" id="studio-title">Le web,<br>un projet à la fois.</h2>
-
-                    <div class="studio__cols">
-                        <p class="reveal">
-                            Développeur passionné par le web, je crée des sites qui ne ressemblent pas aux autres. <strong>Plus de 10 projets livrés</strong> depuis mes débuts&nbsp;: coachs sportifs, indépendants, petites marques.
-                        </p>
-                        <p class="reveal">
-                            Je me spécialise dans les sites pour coachs sportifs et indépendants. Pas juste une page&nbsp;: une présence qui attire des clients et qui te ressemble vraiment.
-                        </p>
-                    </div>
-
-                    <div class="studio__principes">
-                        <p class="reveal"><strong>Rapide &amp; fluide</strong><span>même sur mobile, zéro temps de chargement inutile.</span></p>
-                        <p class="reveal"><strong>Pensé pour convertir</strong><span>un design qui rassure, motive et donne envie d'agir.</span></p>
-                        <p class="reveal"><strong>À ton image</strong><span>je construis le site pour toi, pas depuis un modèle.</span></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== SERVICES ===== -->
-        <section id="services" class="services section" aria-labelledby="services-title" data-num="02">
+        <!-- ===== REPÈRES / CHIFFRES ===== -->
+        <section class="proof" aria-labelledby="proof-title">
             <div class="container">
-                <p class="section-head reveal"><span>02</span> Ce que je crée</p>
-                <h2 class="h-display reveal" id="services-title">Quatre façons<br>de te faire voir.</h2>
+                <h2 class="proof__claim reveal" id="proof-title">Des sites qui transforment tes visiteurs en clients.</h2>
 
-                <ul class="services__list">
-                    <li class="service reveal">
-                        <span class="service__num">01</span>
-                        <h3 class="service__name">Sites pour coachs sportifs</h3>
-                        <p class="service__desc">Programmes, transformations, témoignages&nbsp;: un site qui motive et convertit.</p>
+                <ul class="stats">
+                    <li class="stats__item reveal">
+                        <span class="stats__num" data-count="10" data-suffix="+">10+</span>
+                        <span class="stats__label">Projets livrés</span>
                     </li>
-                    <li class="service reveal">
-                        <span class="service__num">02</span>
-                        <h3 class="service__name">Sites vitrines</h3>
-                        <p class="service__desc">Présente ton activité avec un site moderne et professionnel.</p>
+                    <li class="stats__item reveal">
+                        <span class="stats__num" data-count="3">3</span>
+                        <span class="stats__label">Offres</span>
                     </li>
-                    <li class="service reveal">
-                        <span class="service__num">03</span>
-                        <h3 class="service__name">Landing pages</h3>
-                        <p class="service__desc">Des pages optimisées pour transformer tes visiteurs en clients.</p>
+                    <li class="stats__item reveal">
+                        <span class="stats__num">29,99 €</span>
+                        <span class="stats__label">À partir de</span>
                     </li>
-                    <li class="service reveal">
-                        <span class="service__num">04</span>
-                        <h3 class="service__name">Indépendants &amp; freelances</h3>
-                        <p class="service__desc">Une présence en ligne adaptée à ton activité et à ta façon de travailler.</p>
+                    <li class="stats__item reveal">
+                        <span class="stats__num">9,99 €/mois</span>
+                        <span class="stats__label">Maintenance optionnelle</span>
                     </li>
                 </ul>
             </div>
         </section>
 
-        <!-- ===== CONFIANCE ===== -->
-        <section class="trust" aria-label="Preuves">
-            <div class="container trust__inner">
-                <p class="trust__big reveal"><span class="trust__num" data-count="10" data-suffix="+">10+</span> projets livrés</p>
-                <p class="trust__text reveal">Coachs, indépendants, petites marques&nbsp;: chacun est reparti avec un site sur-mesure, en ligne et prêt à convertir.</p>
+        <!-- ===== STUDIO ===== -->
+        <section id="studio" class="studio section" aria-labelledby="studio-title" data-num="01">
+            <div class="container studio__grid">
+                <p class="section-head reveal"><span>01</span> Studio</p>
+                <div class="studio__body">
+                    <h2 class="h-display reveal" id="studio-title">Un studio web<br>pensé pour les coachs.</h2>
+
+                    <div class="studio__cols">
+                        <p class="reveal">
+                            Je crée des sites modernes qui donnent une <strong>vraie présence en ligne</strong> aux coachs sportifs. Chaque projet est adapté à l'activité, au style et aux objectifs du client.
+                        </p>
+                        <p class="reveal">
+                            Coaching en ligne, programmes, prises de contact&nbsp;: je conçois des sites simples à lire, agréables à utiliser et pensés pour que le visiteur passe à l'action.
+                        </p>
+                    </div>
+
+                    <p class="studio__meta reveal">
+                        WANY est développé par Wany, 16&nbsp;ans, en parallèle de ses études.
+                    </p>
+
+                    <div class="studio__principes">
+                        <p class="reveal"><strong>Rapide &amp; fluide</strong><span>même sur mobile, zéro temps de chargement inutile.</span></p>
+                        <p class="reveal"><strong>Pensé pour convertir</strong><span>un design qui rassure, motive et donne envie d'agir.</span></p>
+                        <p class="reveal"><strong>Adapté à ton activité</strong><span>ton contenu, ton style, tes objectifs.</span></p>
+                    </div>
+
+                    <p class="studio__cta reveal">
+                        <a href="#offres" class="btn btn--ink">Voir les offres<span class="arrow" aria-hidden="true">→</span></a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== OFFRES ===== -->
+        <section id="offres" class="offres section" aria-labelledby="offres-title" data-num="02">
+            <div class="container">
+                <p class="section-head reveal"><span>02</span> Offres</p>
+                <h2 class="h-display reveal" id="offres-title">Un site.<br>Le bon niveau.</h2>
+                <p class="offres__sub reveal">
+                    Choisis simplement le niveau de personnalisation et de finition dont ton activité a besoin.
+                </p>
+
+                <div class="plans">
+
+                    <!-- START -->
+                    <article class="plan reveal">
+                        <h3 class="plan__name">Start</h3>
+                        <p class="plan__price"><span>29,99</span><em>€</em></p>
+                        <p class="plan__hint">Paiement unique</p>
+                        <p class="plan__desc">Pour avoir une présence web propre et efficace.</p>
+                        <ul class="plan__list">
+                            <li>Site personnalisé</li>
+                            <li>Design responsive</li>
+                            <li>Fonctionnalités adaptées au besoin</li>
+                            <li>Hébergement inclus</li>
+                            <li>2 séries de modifications</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--ghost btn--lg plan__cta">Choisir START<span class="arrow" aria-hidden="true">→</span></a>
+                    </article>
+
+                    <!-- PRO -->
+                    <article class="plan plan--pro reveal">
+                        <span class="plan__badge">Le plus choisi</span>
+                        <h3 class="plan__name">Pro</h3>
+                        <p class="plan__price"><span>59,99</span><em>€</em></p>
+                        <p class="plan__hint">Paiement unique</p>
+                        <p class="plan__desc">Pour un site plus travaillé et plus personnalisé.</p>
+                        <ul class="plan__list">
+                            <li>Tout le START</li>
+                            <li>Design plus avancé</li>
+                            <li>Animations et interactions</li>
+                            <li>Fonctionnalités supplémentaires selon le projet</li>
+                            <li>Optimisation mobile avancée</li>
+                            <li>5 séries de modifications</li>
+                            <li>Hébergement inclus</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--signal btn--lg plan__cta">Choisir PRO<span class="arrow" aria-hidden="true">→</span></a>
+                    </article>
+
+                    <!-- PREMIUM -->
+                    <article class="plan plan--premium reveal">
+                        <span class="plan__flag">Sur mesure</span>
+                        <h3 class="plan__name">Premium</h3>
+                        <p class="plan__price"><span>99,99</span><em>€</em></p>
+                        <p class="plan__hint">Paiement unique</p>
+                        <p class="plan__desc">Pour une expérience web vraiment sur mesure.</p>
+                        <ul class="plan__list">
+                            <li>Tout le PRO</li>
+                            <li>Design 100&nbsp;% sur mesure</li>
+                            <li>Animations avancées</li>
+                            <li>Effets visuels premium</li>
+                            <li>Sections interactives</li>
+                            <li>Expérience mobile poussée</li>
+                            <li>Intégrations externes selon les besoins</li>
+                            <li>Publication sur internet (site trouvable sur Google)</li>
+                            <li>Modifications illimitées pendant la création</li>
+                            <li>Maintenance incluse à vie</li>
+                            <li>Hébergement gratuit inclus</li>
+                        </ul>
+                        <a href="#contact" class="btn btn--ink btn--lg plan__cta">Choisir PREMIUM<span class="arrow" aria-hidden="true">→</span></a>
+                    </article>
+
+                </div>
+
+                <p class="plans__note reveal">
+                    Une hésitation&nbsp;? On en parle et je te dis simplement quelle formule te suffit.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== MAINTENANCE ===== -->
+        <section id="maintenance" class="maintenance section" aria-labelledby="maintenance-title">
+            <div class="container maintenance__grid">
+                <div class="maintenance__body">
+                    <p class="section-head section-head--onDark reveal">Maintenance</p>
+                    <h2 class="h-display h-display--paper reveal" id="maintenance-title">Et après<br>la livraison&nbsp;?</h2>
+                    <p class="maintenance__lead reveal">
+                        Ton site reste à jour et évolue avec ton activité.
+                    </p>
+                </div>
+
+                <article class="maint-card reveal">
+                    <p class="maint-card__label">Maintenance</p>
+                    <p class="maint-card__price"><span>9,99</span><em>€</em><small>/mois</small></p>
+                    <p class="maint-card__claim">Hébergement, suivi et petites évolutions, sans que tu aies à t'en occuper.</p>
+
+                    <ul class="maint-card__list">
+                        <li>Publication en ligne (site trouvable sur Google)</li>
+                        <li>Hébergement gratuit (sans nom de domaine)</li>
+                        <li>Maintenance du site</li>
+                        <li>Petites modifications de contenu</li>
+                        <li>Mise à jour des informations</li>
+                        <li>Changements de textes, photos ou tarifs</li>
+                        <li>Corrections mineures</li>
+                    </ul>
+
+                    <p class="maint-card__flag">Optionnelle · Sans engagement</p>
+                    <p class="maint-card__fine">Refonte complète et nouvelles fonctionnalités majeures non incluses.</p>
+                    <a href="#contact" class="btn btn--signal btn--lg">Garder mon site à jour<span class="arrow" aria-hidden="true">→</span></a>
+                </article>
             </div>
         </section>
 
@@ -226,8 +311,8 @@
             <div class="container creations__head">
                 <p class="section-head reveal"><span>03</span> Créations</p>
                 <div class="creations__head-row">
-                    <h2 class="h-display reveal" id="creations-title">Trois projets,<br>trois personnalités.</h2>
-                    <p class="creations__head-note reveal">Un aperçu live&nbsp;: clique sur une fenêtre pour ouvrir le site.</p>
+                    <h2 class="h-display reveal" id="creations-title">Des sites<br>qui existent déjà.</h2>
+                    <p class="creations__head-note reveal">Quelques projets réalisés pour des coachs et indépendants. Clique sur une fenêtre pour ouvrir le site.</p>
                 </div>
             </div>
 
@@ -291,39 +376,44 @@
                 </div>
             </article>
 
-            <p class="creations__more reveal">
-                Et&nbsp;7 autres projets livrés&nbsp;— coachs, indépendants et petites marques.
-            </p>
+            <div class="creations__cta reveal">
+                <p class="creations__more">Trois projets présentés, plus de dix livrés au total. Le tien peut être le prochain.</p>
+                <a href="#contact" class="btn btn--ink btn--lg">Je veux un site comme ça<span class="arrow" aria-hidden="true">→</span></a>
+            </div>
         </section>
 
         <!-- ===== PROCESSUS ===== -->
         <section id="process" class="process section" aria-labelledby="process-title" data-num="04">
             <div class="container">
                 <p class="section-head reveal"><span>04</span> Processus</p>
-                <h2 class="h-display reveal" id="process-title">De l'idée<br>au site clé en main.</h2>
+                <h2 class="h-display reveal" id="process-title">De l'idée<br>au site en ligne.</h2>
 
                 <ol class="process__list">
                     <li class="process__item reveal">
                         <span class="process__num">01</span>
-                        <div class="process__txt"><h3>Discussion</h3><p>On définit le besoin et l'objectif réel de ton site.</p></div>
+                        <div class="process__txt"><h3>Discussion</h3><p>Tu m'expliques ton activité, tes besoins et le style que tu recherches.</p></div>
                     </li>
                     <li class="process__item reveal">
                         <span class="process__num">02</span>
-                        <div class="process__txt"><h3>Design</h3><p>Création d'une identité visuelle et d'une structure pensées pour toi.</p></div>
+                        <div class="process__txt"><h3>Conception</h3><p>Je prépare la structure et le design du site.</p></div>
                     </li>
                     <li class="process__item reveal">
                         <span class="process__num">03</span>
-                        <div class="process__txt"><h3>Développement</h3><p>Le site est construit, testé et optimisé.</p></div>
+                        <div class="process__txt"><h3>Développement</h3><p>Je construis, adapte et optimise le site.</p></div>
                     </li>
                     <li class="process__item reveal">
                         <span class="process__num">04</span>
-                        <div class="process__txt"><h3>Livraison</h3><p>Ton site est livré, prêt à être utilisé et partagé.</p></div>
+                        <div class="process__txt"><h3>Livraison</h3><p>Ton site est livré et prêt à être partagé.</p></div>
                     </li>
                 </ol>
 
                 <p class="process__note reveal">
                     <span class="process__note-ico" aria-hidden="true">↺</span>
-                    Et après la livraison&nbsp;? Je peux faire toutes les modifications que tu veux, à tout moment. Ton site évolue avec toi.
+                    Une première démo peut être préparée avant de lancer le projet.
+                </p>
+
+                <p class="process__fine reveal">
+                    Le nombre de modifications dépend de la formule choisie. Une maintenance à 9,99&nbsp;€/mois permet ensuite de garder le site à jour.
                 </p>
             </div>
         </section>
@@ -332,10 +422,14 @@
         <section id="contact" class="contact section" aria-labelledby="contact-title" data-num="05">
             <div class="container">
                 <p class="section-head section-head--light reveal"><span>05</span> Contact</p>
-                <h2 class="h-display h-display--light reveal" id="contact-title">Ton prochain site<br>commence ici.</h2>
+                <h2 class="h-display h-display--light reveal" id="contact-title">Prêt à avoir<br>ton propre site&nbsp;?</h2>
+                <p class="contact__lead reveal">
+                    Explique-moi rapidement ton projet. On voit ensemble ce qu'il te faut et quelle formule correspond le mieux.
+                </p>
                 <a class="contact__email reveal" href="mailto:ytop2sinj@gmail.com">ytop2sinj@gmail.com<span aria-hidden="true">→</span></a>
                 <div class="contact__actions reveal">
-                    <a href="mailto:ytop2sinj@gmail.com" class="btn btn--ink btn--lg">Commencer mon projet<span aria-hidden="true">→</span></a>
+                    <a href="mailto:ytop2sinj@gmail.com" class="btn btn--ink btn--lg">Parler de mon projet<span class="arrow" aria-hidden="true">→</span></a>
+                    <a href="#offres" class="btn btn--outline btn--lg">Voir les offres<span class="arrow" aria-hidden="true">→</span></a>
                     <a href="https://instagram.com/wn.1r3" target="_blank" rel="noopener" class="btn btn--outline btn--lg">@wn.1r3</a>
                 </div>
             </div>
@@ -348,12 +442,12 @@
         <div class="container footer__inner">
             <div class="footer__top">
                 <a href="#top" class="nav__logo footer__logo">WANY<span class="nav__logo-dot">.</span></a>
-                <p class="footer__claim">Des sites qui transforment les visiteurs en clients. Simple, rapide, efficace.</p>
+                <p class="footer__claim">Des sites modernes, personnalisés et pensés pour les coachs sportifs.</p>
             </div>
 
             <nav class="footer__nav">
                 <a href="#studio">Studio</a>
-                <a href="#services">Services</a>
+                <a href="#offres">Offres</a>
                 <a href="#creations">Créations</a>
                 <a href="#process">Processus</a>
                 <a href="#contact">Contact</a>
@@ -361,10 +455,12 @@
 
             <div class="footer__meta">
                 <span>© 2026 Wany. Tous droits réservés.</span>
-                <span>Design &amp; code avec passion.</span>
+                <span>Hébergement inclus · Maintenance optionnelle à 9,99 €/mois</span>
             </div>
         </div>
     </footer>
+
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Revenir en haut">&uarr;</button>
 
     <script src="script.js"></script>
 </body>
