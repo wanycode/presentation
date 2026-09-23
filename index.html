@@ -418,6 +418,109 @@
             </div>
         </section>
 
+        <!-- ===== AVIS CLIENTS (Supabase) ===== -->
+        <section id="avis" class="avis section" aria-labelledby="avis-title">
+            <div class="container">
+                <p class="section-head reveal">Avis clients</p>
+
+                <div class="avis__top">
+                    <div class="avis__intro">
+                        <h2 class="h-display reveal" id="avis-title">Ils en parlent<br>mieux que moi.</h2>
+                        <p class="avis__lead reveal">
+                            Les retours de coachs et d'indépendants qui utilisent leur site tous les jours. Chaque avis est relu avant d'être publié.
+                        </p>
+                    </div>
+
+                    <aside class="avis__score" id="avisScore" role="status" hidden>
+                        <p class="avis__score-label">Note moyenne</p>
+                        <p class="avis__score-value"><span id="avisAvg">—</span><em>/5</em></p>
+                        <p id="avisAvgStars"></p>
+                        <p class="avis__score-count" id="avisCount"></p>
+                    </aside>
+                </div>
+
+                <p class="avis__state" id="avisLoading" role="status" hidden>
+                    <span class="avis__spinner" aria-hidden="true"></span>
+                    Chargement des avis…
+                </p>
+
+                <p class="avis__state avis__state--empty" id="avisEmpty" role="status" hidden>
+                    Aucun avis publié pour le moment. Sois le premier à raconter ton expérience.
+                </p>
+
+                <p class="avis__state avis__state--error" id="avisError" role="alert" hidden></p>
+
+                <ul class="avis__list" id="avisList" hidden></ul>
+
+                <noscript>
+                    <p class="avis__state avis__state--empty">Les avis se chargent avec JavaScript. Active-le pour les consulter et laisser le tien.</p>
+                </noscript>
+
+                <div class="avis__foot reveal">
+                    <button type="button" class="btn btn--ink btn--lg" id="avisOpen">
+                        Laisser un avis<span class="arrow" aria-hidden="true">→</span>
+                    </button>
+                    <p class="avis__foot-note">Ton avis part directement au studio, il est publié après vérification.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== MODAL — LAISSER UN AVIS ===== -->
+        <dialog class="avis-modal" id="avisModal" aria-label="Laisser un avis">
+            <button type="button" class="avis-modal__close" id="avisClose" aria-label="Fermer la fenêtre">
+                <span aria-hidden="true">×</span>
+            </button>
+
+            <form class="avis-form" id="avisForm" method="dialog" novalidate>
+                <p class="avis-form__label">Nouveau retour</p>
+                <h3 class="avis-form__title">Laisser un avis</h3>
+                <p class="avis-form__lead">Ton prénom, une note, quelques mots. C'est tout.</p>
+
+                <div class="field">
+                    <label class="field__label" for="avisName">Prénom / nom</label>
+                    <input class="field__input" type="text" id="avisName" name="name" maxlength="60"
+                           autocomplete="name" placeholder="Ex : Kevin D.">
+                </div>
+
+                <fieldset class="field field--rating">
+                    <legend class="field__label">Ta note</legend>
+                    <div class="rating" id="avisRating">
+                        <input type="radio" id="avisStar5" name="rating" value="5" aria-label="5 étoiles sur 5">
+                        <label for="avisStar5" aria-hidden="true">★</label>
+                        <input type="radio" id="avisStar4" name="rating" value="4" aria-label="4 étoiles sur 5">
+                        <label for="avisStar4" aria-hidden="true">★</label>
+                        <input type="radio" id="avisStar3" name="rating" value="3" aria-label="3 étoiles sur 5">
+                        <label for="avisStar3" aria-hidden="true">★</label>
+                        <input type="radio" id="avisStar2" name="rating" value="2" aria-label="2 étoiles sur 5">
+                        <label for="avisStar2" aria-hidden="true">★</label>
+                        <input type="radio" id="avisStar1" name="rating" value="1" aria-label="1 étoile sur 5">
+                        <label for="avisStar1" aria-hidden="true">★</label>
+                    </div>
+                </fieldset>
+
+                <div class="field">
+                    <label class="field__label" for="avisReview">Ton commentaire</label>
+                    <textarea class="field__input field__input--area" id="avisReview" name="review" rows="5"
+                              maxlength="800" placeholder="Ce que tu penses du site, du design, de l'accompagnement…"></textarea>
+                    <p class="field__count"><span id="avisReviewCount">0</span> / <span id="avisReviewMax">800</span></p>
+                </div>
+
+                <p class="avis-form__error" id="avisFormError" role="alert" hidden></p>
+
+                <button type="submit" class="btn btn--signal btn--lg avis-form__submit" id="avisSubmit">
+                    <span id="avisSubmitText">Publier</span><span class="arrow" aria-hidden="true">→</span>
+                </button>
+                <p class="avis-form__note">Ton avis n'apparaît sur le site qu'après validation.</p>
+            </form>
+
+            <div class="avis-form__done" id="avisDone" hidden>
+                <span class="avis-form__done-ico" aria-hidden="true">✓</span>
+                <h3>Merci, ton avis est parti.</h3>
+                <p>Il sera publié après vérification. Merci d'avoir pris le temps.</p>
+                <button type="button" class="btn btn--ink avis-form__done-btn" id="avisDoneBtn">Fermer</button>
+            </div>
+        </dialog>
+
         <!-- ===== CONTACT ===== -->
         <section id="contact" class="contact section" aria-labelledby="contact-title" data-num="05">
             <div class="container">
@@ -462,6 +565,8 @@
 
     <button class="back-to-top" id="backToTop" type="button" aria-label="Revenir en haut">&uarr;</button>
 
+    <!-- Supabase (clé publishable uniquement côté navigateur) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -8,7 +8,8 @@ Landing page premium de **WANY**, studio web spécialisé dans la création de s
 Direction artistique : **Studio Noir** — encre `#0A0A0A` · papier `#F4F2ED` · signal `#FF5A1F`
 Typographies : `Unbounded` (titres) · `Space Grotesk` (texte) · `JetBrains Mono` (labels)
 
-Aucun backend, aucune base de données : HTML, CSS et JavaScript uniquement.
+Pas de framework ni de build : HTML, CSS et JavaScript. La **seule** dépendance externe est
+Supabase, utilisée uniquement pour collecter et afficher les **avis clients**.
 
 ---
 
@@ -26,6 +27,74 @@ Modifications : **2 séries** (START), **5 séries** (PRO), **illimitées pendan
 
 ---
 
+## Avis clients (Supabase)
+
+Section `#avis`, placée entre le processus et le contact.
+
+### Fonctionnement
+
+1. Le visiteur ouvre le modal « Laisser un avis ».
+2. Il saisit son prénom/nom, une note de **1 à 5 étoiles** et un commentaire.
+3. À l'envoi, la ligne est insérée dans `public."business-reviews"` avec **`approved = false`**.
+4. Le site public ne lit que les avis **`approved = true`** : rien ne s'affiche sans validation.
+
+La lecture est filtrée sur **`site_id = SITE_ID`** **ET** `approved = true`, triée du plus récent
+au plus ancien. L'avis d'un autre client ne peut donc jamais apparaître sur ce site.
+
+Le site n'émet **aucune** requête de mise à jour ou de suppression : il ne peut que lire
+(les avis approuvés) et insérer (des avis non approuvés).
+
+### Configuration — nouveau site client
+
+Tout se règle dans un seul bloc, en haut de `script.js` :
+
+```js
+const SUPABASE_URL = 'https://ahtfwbsvicdljpsveqra.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_...';
+const REVIEWS_TABLE = 'business-reviews';
+const SITE_ID = 'wany-studio';   /* ← identifiant de CE site */
+```
+
+Pour un nouveau client, change **uniquement `SITE_ID`** (ex. `'papafit'`).
+⚠️ Un avis enregistré avec un `site_id` différent reste invisible pour toujours sur ce site.
+
+Clé **publishable** uniquement côté navigateur — ne jamais mettre une clé `sb_secret_` ici.
+
+### Modération
+
+Les avis arrivent non approuvés. Pour publier : dashboard Supabase → table `business-reviews`
+→ passer `approved` à `true`. Aucune autre action n'est nécessaire, le site se met à jour au
+prochain chargement.
+
+### Table
+
+| Colonne      | Type        | Défaut   |
+| ------------ | ----------- | -------- |
+| `id`         | int8        | identity |
+| `site_id`    | text        | —        |
+| `name`       | text        | —        |
+| `rating`     | int2        | —        |
+| `review`     | text        | —        |
+| `approved`   | bool        | `false`  |
+| `created_at` | timestamptz | `now()`  |
+
+### Durcissement conseillé (policy RLS)
+
+La policy `INSERT WITH CHECK (true)` autorise n'importe quel contenu : le `approved: false`
+envoyé par le site est une protection **côté client seulement**. Un appel direct à l'API REST
+peut insérer `approved: true` et contourner la modération. Pour fermer cette faille :
+
+```sql
+create policy "insert non approuve" on public."business-reviews"
+for insert with check (
+    approved = false
+    and rating between 1 and 5
+    and length(review) between 5 and 800
+);
+```
+
+---
+
 ## Parcours de conversion
 
 `coach → comprend l'offre → voit les prix → voit les créations → contacte WANY`
@@ -39,9 +108,9 @@ grille tarifaire, section maintenance, créations et section contact.
 
 ```
 presentation/
-├── index.html     # Structure sémantique (hero, repères, studio, offres, maintenance…)
-├── styles.css     # Feuille de styles « Studio Noir » + grille tarifaire
-├── script.js      # Reveal au scroll, menu mobile, compteurs, copie de l'email, retour haut
+├── index.html     # Structure sémantique (hero, repères, studio, offres, maintenance, avis, contact…)
+├── styles.css     # Feuille de styles « Studio Noir » + grille tarifaire + avis clients
+├── script.js      # Reveal, menu mobile, compteurs, avis clients (Supabase), retour haut
 ├── favicon.svg    # Favicon WANY
 ├── og-image.svg   # Carte de partage social
 └── README.md
@@ -68,4 +137,6 @@ presentation/
 
 - **Modifier les prix** : dans `<section id="offres">`, chaque carte contient un `.plan__price`.
 - **Ajouter un projet** : dupliquer un `<article class="work">` dans `<section id="creations">`.
-- **Ajouter une prestation** : dupliquer un `<li class="cap">` dans `.caps__grid`.
+- **Changer le site des avis** : la constante `SITE_ID` en haut de `script.js`.
+- **Changer la longueur max d'un avis** : la constante `REVIEW_MAX_LENGTH` dans `script.js`
+  (elle pilote à la fois le `maxlength` du champ et le compteur affiché).

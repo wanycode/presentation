@@ -10,7 +10,7 @@
    04 Boutons           10 Hero              16 Contact
    05 Typographie       11 Ticker            17 Footer
    06 Sections          12 Studio & savoir-faire   18 Offres
-   19 Maintenance       20 Pourquoi Wany     21 Réglages & reveal
+   19 Maintenance       20 Avis clients      21 Réglages & reveal
    22 Responsive        23 Mouvement réduit
    ============================================================ */
 
@@ -2213,6 +2213,521 @@ body.is-locked {
 }
 
 /* ============================================================
+   20 · AVIS CLIENTS
+   ============================================================ */
+.avis {
+    background: var(--paper);
+}
+
+.avis__top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 30px 48px;
+    margin-bottom: clamp(30px, 4vw, 46px);
+}
+
+.avis__intro .h-display {
+    margin-bottom: 18px;
+}
+
+.avis__lead {
+    max-width: 54ch;
+    font-size: 1.04rem;
+    color: var(--ink-soft);
+}
+
+/* --- Panneau de notation --- */
+.avis__score {
+    min-width: 240px;
+    padding: 24px 26px 22px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius-lg);
+    box-shadow: 7px 7px 0 var(--signal);
+}
+
+.avis__score-label {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244, 242, 237, 0.55);
+}
+
+.avis__score-value {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin: 12px 0 10px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2.5rem, 5vw, 3.3rem);
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+    color: var(--paper);
+}
+
+.avis__score-value em {
+    font-style: normal;
+    font-size: 0.4em;
+    font-weight: 700;
+    color: rgba(244, 242, 237, 0.5);
+}
+
+.avis__score-count {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(244, 242, 237, 0.62);
+}
+
+/* --- Étoiles --- */
+.stars {
+    display: inline-flex;
+    gap: 3px;
+    line-height: 1;
+}
+
+.stars i {
+    font-style: normal;
+    font-size: 1.05rem;
+    color: var(--line-strong);
+}
+
+.stars i.is-on {
+    color: var(--signal);
+}
+
+.avis__score .stars i {
+    color: rgba(244, 242, 237, 0.24);
+}
+
+.avis__score .stars i.is-on {
+    color: var(--signal);
+}
+
+/* --- États (chargement · vide · erreur) --- */
+.avis__state {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+.avis__state--empty {
+    max-width: 52ch;
+    padding: 22px 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--signal);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    letter-spacing: 0;
+    color: var(--ink-soft);
+}
+
+.avis__state--error {
+    max-width: 60ch;
+    padding: 18px 22px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--signal);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    letter-spacing: 0;
+    color: var(--ink);
+}
+
+.avis__spinner {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--line-strong);
+    border-top-color: var(--signal);
+    border-radius: 50%;
+    animation: avisSpin 0.8s linear infinite;
+}
+
+@keyframes avisSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- Liste des avis --- */
+.avis__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    align-items: start;
+    gap: 20px;
+    list-style: none;
+}
+
+.avis-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px 24px 22px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--signal);
+    border-radius: var(--radius);
+    animation: avisCardIn 0.55s var(--ease) backwards;
+    animation-delay: var(--d, 0ms);
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
+                border-color 0.3s ease;
+}
+
+@keyframes avisCardIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+}
+
+.avis-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hard);
+    border-color: var(--ink);
+    border-left-color: var(--signal);
+}
+
+.avis-card__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.avis-card__name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    overflow-wrap: break-word;
+}
+
+.avis-card__text {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    overflow-wrap: break-word;
+}
+
+.avis-card__date {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* --- Appel à témoignage --- */
+.avis__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 26px;
+    margin-top: clamp(30px, 4vw, 44px);
+    padding-top: clamp(26px, 3vw, 36px);
+    border-top: 1px solid var(--line);
+}
+
+.avis__foot-note {
+    max-width: 46ch;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+/* ============================================================
+   20b · MODAL — LAISSER UN AVIS
+   ============================================================ */
+.avis-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1010;
+    width: min(560px, calc(100vw - 28px));
+    max-width: none;
+    max-height: min(86vh, 780px);
+    margin: auto;
+    padding: 34px 32px 30px;
+    overflow: auto;
+    overscroll-behavior: contain;
+    background: var(--paper);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-hard-lg);
+}
+
+.avis-modal[open] {
+    animation: avisModalIn 0.34s var(--ease-out);
+}
+
+@keyframes avisModalIn {
+    from { opacity: 0; transform: translateY(18px) scale(0.985); }
+    to { opacity: 1; transform: none; }
+}
+
+.avis-modal::backdrop {
+    background: rgba(10, 10, 10, 0.62);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.avis-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    font-size: 1.15rem;
+    line-height: 1;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.3s var(--ease);
+}
+
+.avis-modal__close:hover {
+    background: var(--ink);
+    color: var(--signal);
+    transform: rotate(90deg);
+}
+
+/* --- Formulaire --- */
+.avis-form__label {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--signal-deep);
+}
+
+.avis-form__title {
+    margin: 12px 0 8px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.65rem, 4vw, 2.2rem);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+}
+
+.avis-form__lead {
+    margin-bottom: 26px;
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+}
+
+.field {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.field--rating {
+    padding: 0;
+    border: 0;
+}
+
+.field__label {
+    display: block;
+    margin-bottom: 9px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.field.is-invalid .field__label {
+    color: var(--signal-deep);
+}
+
+.field__input {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--white);
+    border: 2px solid var(--line-strong);
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--ink);
+    transition: border-color 0.2s ease, box-shadow 0.24s var(--ease);
+}
+
+.field__input::placeholder {
+    color: rgba(115, 111, 102, 0.72);
+}
+
+.field__input:focus {
+    border-color: var(--ink);
+}
+
+.field.is-invalid .field__input {
+    border-color: var(--signal);
+}
+
+.field__input--area {
+    min-height: 116px;
+    resize: vertical;
+}
+
+.field__count {
+    margin-top: 8px;
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
+/* --- Sélecteur d'étoiles --- */
+.rating {
+    position: relative;
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 4px;
+}
+
+.rating input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.rating label {
+    padding: 0 2px;
+    font-size: 1.85rem;
+    line-height: 1;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.16s ease, transform 0.2s var(--ease);
+}
+
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label {
+    color: var(--signal);
+}
+
+.rating label:hover {
+    transform: scale(1.12);
+}
+
+.rating input:focus-visible + label {
+    outline: 3px solid var(--signal);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Note manquante : on encadre le sélecteur sans simuler une sélection */
+.field.is-invalid .rating {
+    outline: 2px dashed var(--signal);
+    outline-offset: 8px;
+    border-radius: 8px;
+}
+
+/* --- Erreurs & envoi --- */
+.avis-form__error {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 18px;
+    padding: 13px 16px;
+    background: var(--signal-soft);
+    border-left: 3px solid var(--signal);
+    border-radius: var(--radius);
+    font-size: 0.94rem;
+    color: var(--ink);
+}
+
+.avis-form__submit {
+    width: 100%;
+}
+
+.avis-form__submit[disabled] {
+    opacity: 0.62;
+    cursor: progress;
+    transform: none;
+}
+
+.avis-form__note {
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+/* --- Confirmation --- */
+.avis-form__done {
+    padding: 14px 0 4px;
+    text-align: center;
+}
+
+.avis-form__done-ico {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 22px;
+    background: var(--signal);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    box-shadow: 4px 4px 0 var(--ink);
+}
+
+.avis-form__done h3 {
+    margin-bottom: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3.4vw, 1.8rem);
+    letter-spacing: -0.025em;
+}
+
+.avis-form__done p {
+    max-width: 40ch;
+    margin: 0 auto 24px;
+    color: var(--ink-soft);
+}
+
+.avis-form__done-btn {
+    min-width: 180px;
+}
+
+/* Les états masqués doivent gagner sur nos display: flex/grid */
+.avis__list[hidden],
+.avis__state[hidden],
+.avis__score[hidden],
+.avis-form__done[hidden],
+.avis-form__error[hidden] {
+    display: none;
+}
+
+/* ============================================================
    21 · RÉGLAGES & REVEAL
    ============================================================ */
 .back-to-top {
@@ -2340,10 +2855,6 @@ body.is-locked {
 /* Sur tactile, un tap déclenche l'état hover : on neutralise les décalages
    qui feraient sauter la grille (les fonds et les barres restent) */
 @media (hover: none) {
-    .cap:hover {
-        padding-left: 26px;
-    }
-
     .studio__principes p:hover {
         padding-left: 4px;
     }
@@ -2402,9 +2913,21 @@ body.is-locked {
         grid-template-columns: 1fr;
     }
 
+    .avis__top {
+        grid-template-columns: 1fr;
+        align-items: start;
+    }
+
+    .avis__score {
+        min-width: 0;
+        width: 100%;
+        max-width: 340px;
+    }
+
     .stats {
         grid-template-columns: 1fr 1fr;
     }
+}
 
 
 
@@ -2485,6 +3008,19 @@ body.is-locked {
         grid-template-columns: 1fr;
     }
 
+    .avis__list {
+        grid-template-columns: 1fr;
+    }
+
+    .avis-modal {
+        width: calc(100vw - 22px);
+        padding: 28px 20px 24px;
+    }
+
+    .rating label {
+        font-size: 1.7rem;
+    }
+
     .btn--lg {
         width: 100%;
         padding: 17px 22px;
@@ -2511,6 +3047,7 @@ body.is-locked {
     .hero__stamp,
     .beacon__dot,
     .hero__kicker-dot,
+    .avis__spinner,
     .ticker__track {
         animation: none !important;
     }
