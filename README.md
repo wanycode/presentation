@@ -56,7 +56,8 @@ const SITE_ID = 'wany-studio';   /* ← identifiant de CE site */
 ```
 
 Pour un nouveau client, change **uniquement `SITE_ID`** (ex. `'papafit'`).
-⚠️ Un avis enregistré avec un `site_id` différent reste invisible pour toujours sur ce site.
+⚠️ Un avis enregistré avec un `site_id` différent reste invisible sur ce site tant qu'il n'est
+pas corrigé (depuis le dashboard : renseigne la colonne `site_id`).
 
 Clé **publishable** uniquement côté navigateur — ne jamais mettre une clé `sb_secret_` ici.
 
@@ -64,9 +65,25 @@ Clé **publishable** uniquement côté navigateur — ne jamais mettre une clé 
 
 Les avis arrivent non approuvés. Pour publier : dashboard Supabase → table `business-reviews`
 → passer `approved` à `true`. Aucune autre action n'est nécessaire, le site se met à jour au
-prochain chargement.
+prochain chargement (recharge la page pour le voir apparaître).
+
+⚠️ **Avant d'approuver, vérifie la colonne `site_id`** : elle doit valoir exactement `wany-studio`
+(la valeur de `SITE_ID` dans `script.js`). Un avis approuvé dont le `site_id` est vide ou
+différent restera **invisible** sur le site tant que la colonne `site_id` n'est pas corrigée
+depuis le dashboard, et sans aucun message d'erreur. C'est la cause n°1 d'un avis « publié mais absent ».
+
+Bonus : le tableau du dashboard affiche la colonne `approved`. Trie-la ou filtre sur `false`
+pour ne voir que les avis en attente.
+
+💡 **Tant qu'aucun avis n'est approuvé, la section affiche volontairement « Aucun avis publié
+pour le moment » : ce n'est pas un bug**, c'est le comportement attendu. Dès qu'une ligne passe
+à `approved = true` avec le bon `site_id`, elle apparaît et la note moyenne se calcule toute seule.
 
 ### Table
+
+Le nom de la table contient un **tiret** : en SQL, il doit **toujours** être entre guillemets
+(`public."business-reviews"`), sinon la requête échoue. Dans le Table Editor du dashboard,
+ce problème ne se pose pas.
 
 | Colonne      | Type        | Défaut   |
 | ------------ | ----------- | -------- |
@@ -89,9 +106,19 @@ create policy "insert non approuve" on public."business-reviews"
 for insert with check (
     approved = false
     and rating between 1 and 5
-    and length(review) between 5 and 800
+    and char_length(btrim(coalesce(review, ''))) between 5 and 800
+    and char_length(btrim(coalesce(site_id, ''))) >= 1
 );
 ```
+
+Les bornes `5` et `800` doivent **rester alignées** sur `REVIEW_MIN_LENGTH` et
+`REVIEW_MAX_LENGTH` dans `script.js` : si tu changes l'une des deux constantes sans toucher à
+la policy, des avis refusés par la base feront échouer l'envoi sans explication claire côté site.
+
+⚠️ RLS est **permissif** : cette policy s'ajoute à celle qui existe déjà, elle ne la remplace
+pas. Tant que l'ancienne `WITH CHECK (true)` est présente, la faille reste ouverte — il faut
+la supprimer (dashboard → Authentication/Policies, ou `drop policy "<nom>" on public."business-reviews";`).
+`site_id` non vide est imposé ici pour empêcher la création d'avis définitivement invisibles.
 
 ---
 
